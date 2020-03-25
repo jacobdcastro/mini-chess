@@ -1,65 +1,66 @@
+const Pieces = require("./pieces");
 const Space = require("./space");
-const Pawn = require("./pieces/pawn");
-const Rook = require("./pieces/rook");
-const Bishop = require("./pieces/bishop");
-const Knight = require("./pieces/knight");
-const King = require("./pieces/king");
+const { getBoardSnapshot, checkCastling } = require("../helpers/fen");
 
 class Game {
 	constructor() {
-		this.board = this.buildInitialBoard();
-		this.capturedPieces = {
-			black: [],
-			white: []
-		};
-		this.player1 = {};
-		this.player2 = {};
+		this.pieces = new Pieces();
+		this.board = [[], [], [], [], [], [], [], []];
+		this.turn = "w";
+		this.player1 = new Player("", "w");
+		this.player2 = new Player("", "b");
+		this.updateBoard = this.updateBoard;
+		this.updateBoard();
+		this.history = [this.updateHistory()];
+		this.addPlayer = this.addPlayer;
 	}
 
-	buildInitialBoard() {
-		let board = [[], [], [], [], [], [], [], []];
+	updateBoard() {
+		const { active } = this.pieces;
+		const allPieces = active.white.concat(active.black);
 
-		board[0][0] = new Space(0, 0, new Rook(true, { x: 0, y: 0 }));
-		board[0][1] = new Space(0, 1, new Knight(true, { x: 1, y: 0 }));
-		board[0][2] = new Space(0, 2, new Bishop(true, { x: 2, y: 0 }));
-		board[0][3] = new Space(0, 3);
-		board[0][4] = new Space(0, 4, new King(true, { x: 4, y: 0 }));
-		board[0][5] = new Space(0, 5, new Bishop(true, { x: 5, y: 0 }));
-		board[0][6] = new Space(0, 6, new Knight(true, { x: 0, y: 6 }));
-		board[0][7] = new Space(0, 7, new Rook(true, { x: 7, y: 0 }));
-
-		// white pawns
-		for (let i = 0; i < 8; i++) {
-			board[1].push(new Space(1, i, new Pawn(true, { x: i, y: 1 })));
-		}
-
-		// middle empty spaces
-		for (let y = 2; y < 6; y++) {
+		for (let y = 0; y < 8; y++) {
 			for (let x = 0; x < 8; x++) {
-				board[y].push(new Space(y, x));
+				const piece = allPieces.find(
+					({ position }) => position.x === x && position.y === y
+				);
+				this.board[y][x] = new Space(
+					y,
+					x,
+					piece && { type: "ref", _id: piece._id }
+				);
 			}
 		}
+	}
 
-		// black pawns
-		for (let i = 0; i < 8; i++) {
-			board[6].push(new Space(6, i, new Pawn(false, { x: i, y: 6 })));
-		}
+	// TODO finish fen generation
+	// https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
+	updateHistory() {
+		let fen = "";
+		const timestamp = new Date();
 
-		board[7][0] = new Space(7, 0, new Rook(false, { x: 0, y: 7 }));
-		board[7][1] = new Space(7, 1, new Knight(false, { x: 1, y: 7 }));
-		board[7][2] = new Space(7, 2, new Bishop(false, { x: 2, y: 7 }));
-		board[7][3] = new Space(7, 3, new King(false, { x: 3, y: 7 }));
-		board[7][4] = new Space(7, 4);
-		board[7][5] = new Space(7, 5, new Bishop(false, { x: 5, y: 7 }));
-		board[7][6] = new Space(7, 6, new Knight(false, { x: 6, y: 7 }));
-		board[7][7] = new Space(7, 7, new Rook(false, { x: 7, y: 7 }));
+		// board snapshot
+		fen += getBoardSnapshot(this.board);
 
-		return board;
+		// which color's turn
+		fen += " " + this.turn + " ";
+
+		// determine castling abilities
+		fen += checkCastling(this.pieces);
+
+		return { fen, timestamp };
+	}
+
+	addPlayer(name, color) {
+		if (this.players.length === 2) return;
+		else if (this.players.length === 1) {
+			if (this.players[0].color === "w") {
+				this.players.push(new Player(name, "b"));
+			} else {
+				this.players.push(new Player(name, "w"));
+			}
+		} else this.players.push(new Player(name, color));
 	}
 }
-
-const { board } = new Game();
-
-console.log(board[7][3].piece.getPossibleMoves(board));
 
 module.exports = Game;

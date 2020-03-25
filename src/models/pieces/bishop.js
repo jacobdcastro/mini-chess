@@ -2,9 +2,9 @@ const Piece = require("../piece");
 const getSpaceIds = require("../../helpers/getSpaceIds");
 
 class Bishop extends Piece {
-	constructor(isWhite, position) {
+	constructor(isWhite, position, idNum) {
 		super(isWhite, position, "♝ ", "♗ ");
-		this._id = isWhite ? "B" : "b";
+		this._id = (isWhite ? "B" : "b") + idNum.toString();
 		this.getPossibleMoves = this.getPossibleMoves;
 	}
 

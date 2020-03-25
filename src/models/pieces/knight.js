@@ -2,9 +2,9 @@ const Piece = require("../piece");
 const getSpaceIds = require("../../helpers/getSpaceIds");
 
 class Knight extends Piece {
-	constructor(isWhite, position) {
+	constructor(isWhite, position, idNum) {
 		super(isWhite, position, "♞ ", "♘ ");
-		this._id = isWhite ? "N" : "n";
+		this._id = (isWhite ? "N" : "n") + idNum.toString();
 		this.getPossibleMoves = this.getPossibleMoves;
 	}
 

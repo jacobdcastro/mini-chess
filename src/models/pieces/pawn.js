@@ -2,10 +2,9 @@ const Piece = require("../piece");
 const getSpaceIds = require("../../helpers/getSpaceIds");
 
 class Pawn extends Piece {
-	constructor(isWhite, position) {
+	constructor(isWhite, position, idNum) {
 		super(isWhite, position, "♟ ", "♙ ");
-		this._id = isWhite ? "P" : "p";
-		this.firstMove = true;
+		this._id = (isWhite ? "P" : "p") + idNum.toString();
 		this.getPossibleMoves = this.getPossibleMoves;
 	}
 
@@ -28,7 +27,6 @@ class Pawn extends Piece {
 			if (space2.piece === null) possibleMoves.push(pos2);
 
 			if (x !== 7) {
-				console.log(pos3);
 				const space3 = board[pos3.y][pos3.x];
 				if (space3.piece !== null && space3.piece.isWhite !== this.isWhite) {
 					possibleMoves.push(pos3);

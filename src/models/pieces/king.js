@@ -6,8 +6,7 @@ class King extends Piece {
 		super(isWhite, position, "♚ ", "♔ ");
 		this._id = isWhite ? "K" : "k";
 		this.inCheck = false;
-		this.hasCastled = false;
-		this.isFirstMove = true;
+		this.getPossibleMoves = this.getPossibleMoves;
 	}
 
 	getPossibleMoves(board) {

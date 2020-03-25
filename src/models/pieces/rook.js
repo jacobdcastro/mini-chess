@@ -2,10 +2,9 @@ const Piece = require("../piece");
 const getSpaceIds = require("../../helpers/getSpaceIds");
 
 class Rook extends Piece {
-	constructor(isWhite, position) {
+	constructor(isWhite, position, idNum) {
 		super(isWhite, position, "♜ ", "♖ ");
-		this._id = isWhite ? "R" : "r";
-		this.firstMove = false;
+		this._id = (isWhite ? "R" : "r") + idNum.toString();
 		this.getPossibleMoves = this.getPossibleMoves;
 	}
 
