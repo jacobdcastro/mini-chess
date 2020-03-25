@@ -1,14 +1,12 @@
-const React = require('react');
+const React = require("react");
+const Game = require("../models/game");
 
-const useGame = () => {
-	const [board, setBoard] = React.useState();
-	const [players, setPlayers] = React.useState();
+const useChessGame = () => {
+	const [game] = React.useState(new Game());
 
-	React.useEffect(() => {
-		console.log('oi!');
-	}, []);
+	React.useEffect(() => {}, [game.history]);
 
-	return;
+	return game;
 };
 
-module.exports = useGame;
+module.exports = useChessGame;
