@@ -6,7 +6,7 @@ class Piece {
 		this.position = position;
 		this.position._id = getSpaceId(position.y, position.x);
 		this.isCaptured = false;
-		this.img = isWhite ? imgW : imgB;
+		this.icon = isWhite ? imgW : imgB;
 		this.capture = this.capture;
 		this.move = this.move;
 	}
