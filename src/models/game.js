@@ -2,6 +2,7 @@ const Space = require("./space");
 const Pawn = require("./pieces/pawn");
 const Rook = require("./pieces/rook");
 const Bishop = require("./pieces/bishop");
+const Knight = require("./pieces/knight");
 
 class Game {
 	constructor() {
@@ -18,12 +19,12 @@ class Game {
 		let board = [[], [], [], [], [], [], [], []];
 
 		board[0][0] = new Space(0, 0, new Rook(true, { x: 0, y: 0 }));
-		board[0][1] = new Space(0, 1);
+		board[0][1] = new Space(0, 1, new Knight(true, { x: 1, y: 0 }));
 		board[0][2] = new Space(0, 2, new Bishop(true, { x: 2, y: 0 }));
 		board[0][3] = new Space(0, 3);
 		board[0][4] = new Space(0, 4);
 		board[0][5] = new Space(0, 5, new Bishop(true, { x: 5, y: 0 }));
-		board[0][6] = new Space(0, 6);
+		board[0][6] = new Space(0, 6, new Knight(true, { x: 0, y: 6 }));
 		board[0][7] = new Space(0, 7, new Rook(true, { x: 7, y: 0 }));
 
 		// white pawns
@@ -44,12 +45,12 @@ class Game {
 		}
 
 		board[7][0] = new Space(7, 0, new Rook(false, { x: 0, y: 7 }));
-		board[7][1] = new Space(7, 1);
+		board[7][1] = new Space(7, 1, new Knight(false, { x: 1, y: 7 }));
 		board[7][2] = new Space(7, 2, new Bishop(false, { x: 2, y: 7 }));
 		board[7][3] = new Space(7, 3);
 		board[7][4] = new Space(7, 4);
 		board[7][5] = new Space(7, 5, new Bishop(false, { x: 5, y: 7 }));
-		board[7][6] = new Space(7, 6);
+		board[7][6] = new Space(7, 6, new Knight(false, { x: 6, y: 7 }));
 		board[7][7] = new Space(7, 7, new Rook(false, { x: 7, y: 7 }));
 
 		return board;
@@ -58,6 +59,6 @@ class Game {
 
 const { board } = new Game();
 
-// console.log(board[4][4].piece.getPossibleMoves(board));
+console.log(board[7][6].piece);
 
 module.exports = Game;
