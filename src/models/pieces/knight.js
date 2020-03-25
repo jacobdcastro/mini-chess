@@ -1,4 +1,5 @@
 const Piece = require("../piece");
+const getSpaceIds = require("../../helpers/getSpaceIds");
 
 class Knight extends Piece {
 	constructor(isWhite, position) {
@@ -38,6 +39,8 @@ class Knight extends Piece {
 				}
 			}
 		});
+
+		return getSpaceIds(possibleMoves);
 	}
 }
 
