@@ -18,7 +18,7 @@ const Row = ({ rowIndex, spaces }) => {
 	return (
 		<Text>
 			{spaces.map((space, i) => {
-				return <Space key={i} space={space} spaceColor={setColor(i)} />;
+				return <Space key={space._id} space={space} spaceColor={setColor(i)} />;
 			})}
 		</Text>
 	);

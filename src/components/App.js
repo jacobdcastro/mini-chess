@@ -1,16 +1,19 @@
 "use strict";
 const React = require("react");
-const PropTypes = require("prop-types");
 const importJsx = require("import-jsx");
 
+const { GameContextParent } = importJsx("./GameContext");
 const Header = importJsx("./Header");
-const Game = importJsx("./Game");
+const GameView = importJsx("./GameView");
 
 const App = () => {
 	return (
 		<>
 			<Header />
-			<Game />
+
+			<GameContextParent>
+				<GameView />
+			</GameContextParent>
 		</>
 	);
 };

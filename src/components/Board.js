@@ -1,13 +1,16 @@
 const React = require("react");
 const { Box } = require("ink");
+const { GameContext } = require("./GameContext");
 const importJsx = require("import-jsx");
 
 const Row = importJsx("./Row");
 
-const Board = ({ boardState }) => {
+const Board = () => {
+	const { board } = React.useContext(GameContext);
+
 	return (
 		<Box flexDirection="column" alignItems="center">
-			{boardState.map((row, i) => {
+			{board.map((row, i) => {
 				return <Row key={i} rowIndex={i} spaces={row} />;
 			})}
 		</Box>
