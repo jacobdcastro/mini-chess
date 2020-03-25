@@ -12,7 +12,7 @@ class Bishop extends Piece {
 		let possibleMoves = [];
 		const { x, y } = this.position;
 
-		// northeast movement
+		// ? northeast movement
 		for (let i = 1; i < 8; i++) {
 			const pos = { x: x + i, y: y + i };
 			if (pos.x >= 8 || pos.y >= 8) break; // if off-board, break loop
@@ -26,11 +26,12 @@ class Bishop extends Piece {
 				} else {
 					break;
 				}
+			} else {
+				possibleMoves.push(pos);
 			}
-			possibleMoves.push(pos);
 		}
 
-		// northwest movement
+		// ? northwest movement
 		for (let i = 1; i < 8; i++) {
 			const pos = { x: x - i, y: y + i };
 			if (pos.x < 0 || pos.y >= 8) break; // if off-board, break loop
@@ -44,11 +45,12 @@ class Bishop extends Piece {
 				} else {
 					break;
 				}
+			} else {
+				possibleMoves.push(pos);
 			}
-			possibleMoves.push(pos);
 		}
 
-		// southwest movement
+		// ? southwest movement
 		for (let i = 1; i < 8; i++) {
 			const pos = { x: x - i, y: y - i };
 			if (pos.x < 0 || pos.y < 0) break; // if off-board, break loop
@@ -62,11 +64,12 @@ class Bishop extends Piece {
 				} else {
 					break;
 				}
+			} else {
+				possibleMoves.push(pos);
 			}
-			possibleMoves.push(pos);
 		}
 
-		// southeast movement
+		// ? southeast movement
 		for (let i = 1; i < 8; i++) {
 			const pos = { x: x + i, y: y - i };
 			if (pos.x >= 8 || pos.y < 0) break; // if off-board, break loop
@@ -80,8 +83,9 @@ class Bishop extends Piece {
 				} else {
 					break;
 				}
+			} else {
+				possibleMoves.push(pos);
 			}
-			possibleMoves.push(pos);
 		}
 
 		return getSpaceIds(possibleMoves);

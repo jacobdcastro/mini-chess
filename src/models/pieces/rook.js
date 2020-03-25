@@ -13,72 +13,92 @@ class Rook extends Piece {
 		let possibleMoves = [];
 		const { x, y } = this.position;
 
-		// x-axis moves
-		for (let i = x + 1; i < 8; i++) {
-			const pos = { x: i, y };
-			const { piece } = board[y][i];
+		// ? eastward moves
+		// if x === 7, then piece is on east-side edge
+		// of board, don't look for moves in this direction
+		if (x !== 7) {
+			for (let i = x + 1; i < 8; i++) {
+				const pos = { x: i, y };
+				const { piece } = board[y][i];
 
-			if (piece !== null) {
-				// if space is occupied by enemy, add space and break loop
-				if (piece.isWhite !== this.isWhite) {
-					possibleMoves.push(pos);
-					break;
+				if (piece !== null) {
+					// if space is occupied by enemy, add space and break loop
+					if (piece.isWhite !== this.isWhite) {
+						possibleMoves.push(pos);
+						break;
+					} else {
+						break;
+					}
 				} else {
-					break;
+					possibleMoves.push(pos);
 				}
 			}
-			possibleMoves.push(pos);
 		}
 
-		// x-axis opposite moves
-		for (let i = x - 1; i >= 0; i--) {
-			const pos = { x: i, y };
-			const { piece } = board[y][i];
+		// ? westward moves
+		// if x === 0, then piece is on west-side edge
+		// of board, don't look for moves in this direction
+		if (x !== 0) {
+			for (let i = x - 1; i >= 0; i--) {
+				const pos = { x: i, y };
+				const { piece } = board[y][i];
 
-			if (piece !== null) {
-				// if space is occupied by enemy, add space and break loop
-				if (piece.isWhite !== this.isWhite) {
-					possibleMoves.push(pos);
-					break;
+				if (piece !== null) {
+					// if space is occupied by enemy, add space and break loop
+					if (piece.isWhite !== this.isWhite) {
+						possibleMoves.push(pos);
+						break;
+					} else {
+						break;
+					}
 				} else {
-					break;
+					possibleMoves.push(pos);
 				}
 			}
-			possibleMoves.push(pos);
 		}
 
-		// y-axis moves
-		for (let i = y + 1; i < 8; i++) {
-			const pos = { x, y: i };
-			const { piece } = board[i][x];
+		// ? northward moves
+		// if y === 7, then piece is on north-side edge
+		// of board, don't look for moves in this direction
+		if (y !== 7) {
+			for (let i = y + 1; i < 8; i++) {
+				const pos = { x, y: i };
+				const { piece } = board[i][x];
 
-			if (piece !== null) {
-				// if space is occupied by enemy, add space and break loop
-				if (piece.isWhite !== this.isWhite) {
-					possibleMoves.push(pos);
-					break;
+				if (piece !== null) {
+					// if space is occupied by enemy, add space and break loop
+					if (piece.isWhite !== this.isWhite) {
+						possibleMoves.push(pos);
+						break;
+					} else {
+						break;
+					}
 				} else {
-					break;
+					possibleMoves.push(pos);
 				}
 			}
-			possibleMoves.push(pos);
 		}
 
-		// y-axis opposite moves
-		for (let i = y + 1; i >= 0; i--) {
-			const pos = { x, y: i };
-			const { piece } = board[i][x];
+		// ? southward moves
+		// if y === 7, then piece is on south-side edge
+		// of board, don't look for moves in this direction
+		if (y !== 0) {
+			for (let i = y - 1; i >= 0; i--) {
+				const pos = { x, y: i };
+				const { piece } = board[i][x];
 
-			if (piece !== null) {
-				// if space is occupied by enemy, add space and break loop
-				if (piece.isWhite !== this.isWhite) {
-					possibleMoves.push(pos);
-					break;
+				if (piece !== null) {
+					// if space is occupied by enemy, add space and break loop
+					if (piece.isWhite !== this.isWhite) {
+						possibleMoves.push(pos);
+						break;
+					} else {
+						break;
+					}
 				} else {
-					break;
+					possibleMoves.push({ x, y: i });
 				}
 			}
-			possibleMoves.push({ x, y: i });
 		}
 
 		return getSpaceIds(possibleMoves);
