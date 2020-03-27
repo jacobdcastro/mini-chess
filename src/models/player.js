@@ -2,11 +2,19 @@ class Player {
 	constructor(name, color) {
 		this.name = name;
 		this.color = color;
-		this.online = true;
-		this.isHuman = true;
+		this.online = undefined;
+		this.isHuman = undefined;
+		this.changeName = this.changeName;
+		this.setHumanity = this.setHumanity;
 	}
 
 	changeName(newName) {
 		this.name = newName;
 	}
+
+	setHumanity(isHuman) {
+		this.isHuman = isHuman;
+	}
 }
+
+module.exports = Player;

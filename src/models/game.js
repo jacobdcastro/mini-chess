@@ -1,5 +1,6 @@
 const Pieces = require("./pieces");
 const Space = require("./space");
+const Player = require("./player");
 const { getBoardSnapshot, checkCastling } = require("../helpers/fen");
 
 class Game {
@@ -10,9 +11,17 @@ class Game {
 		this.player1 = new Player("", "w");
 		this.player2 = new Player("", "b");
 		this.updateBoard = this.updateBoard;
-		this.updateBoard();
-		this.history = [this.updateHistory()];
+		this.history = [];
 		this.addPlayer = this.addPlayer;
+		this.started = undefined;
+		this.ended = undefined;
+		this.winner = undefined;
+		this.updateBoard();
+	}
+
+	startGame() {
+		this.started = new Date();
+		this.updateHistory();
 	}
 
 	updateBoard() {
