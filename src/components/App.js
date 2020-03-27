@@ -15,6 +15,11 @@ const App = () => {
 	const [player, setPlayer] = React.useState();
 	const { player1, player2 } = game;
 
+	// ! TEMPORARY
+	React.useEffect(() => {
+		setPlayer(player1);
+	}, []);
+
 	return (
 		<>
 			<Header />

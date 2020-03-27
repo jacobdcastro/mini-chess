@@ -6,9 +6,9 @@ const SetupQuestions = importJsx("./SetupQuestions");
 const { useInput } = require("ink");
 
 const GameView = ({ player }) => {
-	if (player) {
-		// useInput((value, key) => {});
+	useInput((value, key) => {});
 
+	if (player) {
 		return (
 			<Box height={15}>
 				<Board />
