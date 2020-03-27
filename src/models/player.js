@@ -6,6 +6,7 @@ class Player {
 		this.isHuman = undefined;
 		this.changeName = this.changeName;
 		this.setHumanity = this.setHumanity;
+		this.cursorPosition = { x: 0, y: 0 };
 	}
 
 	changeName(newName) {
