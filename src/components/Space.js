@@ -1,10 +1,10 @@
 const React = require("react");
 const { Color } = require("ink");
-const { GameContext } = require("./GameContext");
+const App = require("./App");
 
 const Space = ({ space, spaceColor }) => {
 	const [piece, setPiece] = React.useState(null);
-	const { pieces } = React.useContext(GameContext);
+	const { pieces } = React.useContext(App.GameContext);
 
 	React.useEffect(() => {
 		const allPieces = pieces.active.black.concat(pieces.active.white);
