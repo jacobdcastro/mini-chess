@@ -11,14 +11,10 @@ const GameContext = React.createContext();
 const PlayerContext = React.createContext();
 
 const App = () => {
-	const game = useChessGame();
-	const [player, setPlayer] = React.useState();
-	const { player1, player2 } = game;
+	const { game, setGame } = useChessGame();
 
-	// ! TEMPORARY
-	React.useEffect(() => {
-		setPlayer(player1);
-	}, []);
+	const { player1, player2 } = game;
+	const [player, setPlayer] = React.useState(player1);
 
 	return (
 		<>

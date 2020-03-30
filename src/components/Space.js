@@ -5,11 +5,10 @@ const App = require("./App");
 const Space = ({ space, defaultSpaceColor }) => {
 	const [piece, setPiece] = React.useState(null);
 	const { pieces } = React.useContext(App.GameContext);
-	const { cursorPosition } = React.useContext(App.PlayerContext);
+	const { player } = React.useContext(App.PlayerContext);
+	const allPieces = pieces.active.black.concat(pieces.active.white);
 
 	React.useEffect(() => {
-		const allPieces = pieces.active.black.concat(pieces.active.white);
-
 		if (space.piece) {
 			const p = allPieces.find(p => p._id === space.piece._id);
 			setPiece(p);
@@ -18,18 +17,18 @@ const Space = ({ space, defaultSpaceColor }) => {
 		}
 	}, [space.piece]);
 
-	const setActionColor = () => "blue";
+	const setBgColor = () => {
+		if (
+			space.position.x === player.cursorPosition.x &&
+			space.position.y === player.cursorPosition.y
+		) {
+			return "blue";
+		} else {
+			return defaultSpaceColor;
+		}
+	};
 
-	return (
-		<Color
-			bgKeyword={
-				cursorPosition === space.position ? setActionColor() : defaultSpaceColor
-			}
-			bgKeyword={defaultSpaceColor}
-		>
-			{piece ? piece.icon : `  `}
-		</Color>
-	);
+	return <Color bgKeyword={setBgColor()}>{piece ? piece.icon : `  `}</Color>;
 };
 
 module.exports = Space;

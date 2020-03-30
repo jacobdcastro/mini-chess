@@ -1,19 +1,29 @@
 const React = require("react");
-const { Box, Color, useInput } = require("ink");
+const { Box, Color, useInput, Text } = require("ink");
 const App = require("./App");
 const importJsx = require("import-jsx");
+const moveCursor = require("../helpers/moveCursor");
 
 const Row = importJsx("./Row");
 
 const Board = () => {
 	const { board } = React.useContext(App.GameContext);
-	const { player } = React.useContext(App.PlayerContext);
+	const { player, setPlayer } = React.useContext(App.PlayerContext);
+
+	const flipBoard = () => {
+		let rows = [];
+		for (let i = 7; i >= 0; i--) {
+			const row = board[i];
+			rows.push(<Row key={i} rowIndex={i} spaces={row} />);
+		}
+		return rows;
+	};
 
 	useInput((input, key) => {
-		if (key.upArrow || input === "w") player.moveCursor(1);
-		if (key.rightArrow || input === "d") player.moveCursor(2);
-		if (key.downArrow || input === "s") player.moveCursor(3);
-		if (key.leftArrow || input === "a") player.moveCursor(4);
+		setPlayer({
+			...player,
+			cursorPosition: moveCursor(input, key, player)
+		});
 	});
 
 	const showCoordinates = type => {
@@ -48,9 +58,7 @@ const Board = () => {
 					{showCoordinates(1)}
 				</Box>
 				<Box flexDirection="column" alignItems="center">
-					{board.map((row, i) => {
-						return <Row key={i} rowIndex={i} spaces={row} />;
-					})}
+					{flipBoard()}
 				</Box>
 			</Box>
 			<Box flexDirection="row" marginLeft={1.5}>
