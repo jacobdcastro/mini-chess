@@ -19,11 +19,6 @@ class Game {
 		this.updateBoard();
 	}
 
-	startGame() {
-		this.started = new Date();
-		this.updateHistory();
-	}
-
 	updateBoard() {
 		const { active } = this.pieces;
 		const allPieces = active.white.concat(active.black);
