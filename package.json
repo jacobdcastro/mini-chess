@@ -2,7 +2,9 @@
 	"name": "cli-chess",
 	"version": "0.0.0",
 	"license": "MIT",
-	"bin": "cli.js",
+	"bin": {
+		"chess": "cli.js"
+	},
 	"engines": {
 		"node": ">=8"
 	},
@@ -10,8 +12,7 @@
 		"test": "xo && ava"
 	},
 	"files": [
-		"cli.js",
-		"ui.js"
+		"cli.js"
 	],
 	"dependencies": {
 		"import-jsx": "^3.1.0",

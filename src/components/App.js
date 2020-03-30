@@ -25,7 +25,7 @@ const App = () => {
 			<Header />
 
 			<GameContext.Provider value={game}>
-				<PlayerContext.Provider value={{ player1, player2, setPlayer }}>
+				<PlayerContext.Provider value={{ player1, player2, setPlayer, player }}>
 					<GameView player={player} />
 				</PlayerContext.Provider>
 			</GameContext.Provider>

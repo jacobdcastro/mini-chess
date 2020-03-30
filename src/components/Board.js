@@ -1,5 +1,5 @@
 const React = require("react");
-const { Box, Color } = require("ink");
+const { Box, Color, useInput } = require("ink");
 const App = require("./App");
 const importJsx = require("import-jsx");
 
@@ -7,20 +7,31 @@ const Row = importJsx("./Row");
 
 const Board = () => {
 	const { board } = React.useContext(App.GameContext);
-	const player = React.useContext(App.PlayerContext);
+	const { player } = React.useContext(App.PlayerContext);
+
+	useInput((input, key) => {
+		if (key.upArrow || input === "w") player.moveCursor(1);
+		if (key.rightArrow || input === "d") player.moveCursor(2);
+		if (key.downArrow || input === "s") player.moveCursor(3);
+		if (key.leftArrow || input === "a") player.moveCursor(4);
+	});
 
 	const showCoordinates = type => {
 		if (type) {
 			const yAxisElements = [];
 			for (let i = 1; i <= 8; i++) {
-				yAxisElements.push(<Color cyan>{i}</Color>);
+				yAxisElements.push(
+					<Color key={i} cyan>
+						{i}
+					</Color>
+				);
 			}
 			return yAxisElements;
 		} else {
 			const xAxisElements = [];
 			for (let i = 0; i < 8; i++) {
 				xAxisElements.push(
-					<Color cyan>
+					<Color key={i} cyan>
 						{` `}
 						{String.fromCharCode(97 + i)}
 					</Color>
