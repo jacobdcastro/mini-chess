@@ -14,7 +14,7 @@ const App = () => {
 	const { game, setGame } = useChessGame();
 
 	const { player1, player2 } = game;
-	const [player, setPlayer] = React.useState(player2);
+	const [player, setPlayer] = React.useState(player1);
 
 	return (
 		<>
