@@ -21,9 +21,9 @@ const Header = () => {
 					<Text underline>INSTRUCTIONS</Text>
 					<Text>Move cursor: Arrow Keys OR "wasd"</Text>
 					<Text>Select piece to move: Enter</Text>
-					<Text>Confirm space to move piece to: CTRL + Enter</Text>
-					<Text>Unselect piece to move: Shift + Enter</Text>
-					<Text>Hide Instructions: Alt/Cmd + Enter</Text>
+					<Text>Confirm space to move piece to: Enter</Text>
+					{/* <Text>Unselect piece to move: Shift + Enter</Text> */}
+					{/* <Text>Hide Instructions: Alt/Cmd + Enter</Text> */}
 				</Box>
 			) : (
 				<Text>Show Instructions: Alt/Cmd + Enter</Text>
