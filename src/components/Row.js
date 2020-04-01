@@ -4,7 +4,7 @@ const importJsx = require("import-jsx");
 
 const Space = importJsx("./Space");
 
-const Row = ({ rowIndex, spaces }) => {
+const Row = ({ rowIndex, spaces, selectedPossibleMoves }) => {
 	const setColor = i => {
 		if (rowIndex === 0 || rowIndex % 2 === 0) {
 			if (i % 2) return "gray";
@@ -23,6 +23,7 @@ const Row = ({ rowIndex, spaces }) => {
 						key={space._id}
 						space={space}
 						defaultSpaceColor={setColor(i)}
+						selectedPossibleMoves={selectedPossibleMoves}
 					/>
 				);
 			})}

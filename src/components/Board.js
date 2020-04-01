@@ -1,30 +1,79 @@
 const React = require("react");
-const { Box, Color, useInput, Text } = require("ink");
-const App = require("./App");
+const { Box, Color, useInput } = require("ink");
 const importJsx = require("import-jsx");
-const moveCursor = require("../helpers/moveCursor");
+const App = require("./App");
+const {
+	moveCursor,
+	cursorDidMove,
+	highlightPossibleMoves,
+	moveCursorOnPossibleMoves
+} = require("../helpers/cursorActions");
 
-const Row = importJsx("./Row");
+const Row = importJsx("../components/Row");
 
 const Board = () => {
-	const { board } = React.useContext(App.GameContext);
+	const { board, pieces } = React.useContext(App.GameContext);
 	const { player, setPlayer } = React.useContext(App.PlayerContext);
+	const [selectedPossibleMoves, setSelectedPossibleMoves] = React.useState([]);
 
-	const flipBoard = () => {
-		let rows = [];
-		for (let i = 7; i >= 0; i--) {
-			const row = board[i];
-			rows.push(<Row key={i} rowIndex={i} spaces={row} />);
+	// ? listener for user keypresses
+	useInput((input, key) => {
+		// move cursor w/ arrow keys && wasd
+		if (selectedPossibleMoves.length === 0) {
+			setPlayer({
+				...player,
+				cursorPosition: moveCursor(input, key, player)
+			});
+		} else {
+			moveCursorOnPossibleMoves(selectedPossibleMoves, player, setPlayer, key);
 		}
+
+		// reset possible moves array if cursor is moved after piece selection
+		if (selectedPossibleMoves.length > 0 && key.return) {
+			setSelectedPossibleMoves([]);
+		} else if (key.return) {
+			highlightPossibleMoves(
+				pieces,
+				player,
+				setPlayer,
+				setSelectedPossibleMoves,
+				board
+			);
+		}
+	});
+
+	const displayBoard = () => {
+		let rows = [];
+
+		// if player is playing as white, flip board
+		// so white shows at bottom
+		if (player.color === "w") {
+			for (let i = 7; i >= 0; i--) {
+				// rows.push(rowComponent(i, board, selectedPossibleMoves));
+				rows.push(
+					<Row
+						selectedPossibleMoves={selectedPossibleMoves}
+						key={i}
+						rowIndex={i}
+						spaces={board[i]}
+					/>
+				);
+			}
+		} else {
+			for (let i = 0; i < 8; i++) {
+				rows.push(
+					<Row
+						selectedPossibleMoves={selectedPossibleMoves}
+						key={i}
+						rowIndex={i}
+						spaces={board[i]}
+					/>
+				);
+			}
+		}
+
 		return rows;
 	};
-
-	useInput((input, key) => {
-		setPlayer({
-			...player,
-			cursorPosition: moveCursor(input, key, player)
-		});
-	});
 
 	const showCoordinates = type => {
 		if (type) {
@@ -52,13 +101,13 @@ const Board = () => {
 	};
 
 	return (
-		<Box flexDirection="column">
+		<Box marginRight={3} marginLeft={3} flexDirection="column">
 			<Box flexDirection="row">
 				<Box flexDirection="column-reverse" alignItems="center" marginRight={1}>
 					{showCoordinates(1)}
 				</Box>
 				<Box flexDirection="column" alignItems="center">
-					{flipBoard()}
+					{displayBoard()}
 				</Box>
 			</Box>
 			<Box flexDirection="row" marginLeft={1.5}>

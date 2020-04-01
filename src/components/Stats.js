@@ -4,36 +4,55 @@ const InkBox = require("ink-box");
 const App = require("./App");
 const getSpaceId = require("../helpers/getSpaceId");
 
-const fdc = { flexDirection: "column", width: 18 };
+const fdc = { flexDirection: "column", width: 15 };
 const fdr = { flexDirection: "row" };
 
 const Stats = () => {
-	const { player1, player2 } = React.useContext(App.GameContext);
-	const pos1 = player1.cursorPosition;
-	const pos2 = player2.cursorPosition;
+	const { player } = React.useContext(App.PlayerContext);
 
 	return (
 		<Box {...fdr}>
 			<Box {...fdc}>
-				<Text>Player 1</Text>
+				<Text>{player.name}</Text>
 				<Text>
 					<Color green>Time:</Color> 05:00:00
 				</Text>
 				<Text>
 					<Color green>Cursor:</Color>{" "}
-					{getSpaceId(player1.cursorPosition.y, player1.cursorPosition.x)}
+					{getSpaceId(player.cursorPosition.y, player.cursorPosition.x)}
 				</Text>
+				<Box>
+					<Text>
+						<Color green>Captured Pieces:</Color>
+					</Text>
+					<Box></Box>
+				</Box>
 			</Box>
-			<Text> | </Text>
+			<Box flexDirection="column">
+				<Text> | </Text>
+				<Text> | </Text>
+				<Text> | </Text>
+				<Text> | </Text>
+				<Text> | </Text>
+				<Text> | </Text>
+				<Text> | </Text>
+				<Text> | </Text>
+			</Box>
 			<Box {...fdc}>
-				<Text>Player 2</Text>
+				<Text>{player.name}</Text>
 				<Text>
 					<Color green>Time:</Color> 05:00:00
 				</Text>
 				<Text>
 					<Color green>Cursor:</Color>{" "}
-					{getSpaceId(player2.cursorPosition.y, player2.cursorPosition.x)}
+					{getSpaceId(player.cursorPosition.y, player.cursorPosition.x)}
 				</Text>
+				<Box>
+					<Text>
+						<Color green>Captured Pieces:</Color>
+					</Text>
+					<Box></Box>
+				</Box>
 			</Box>
 		</Box>
 	);
