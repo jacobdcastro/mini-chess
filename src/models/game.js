@@ -6,35 +6,37 @@ const { getBoardSnapshot, checkCastling } = require("../helpers/fen");
 class Game {
 	constructor() {
 		this.pieces = new Pieces();
-		this.board = [[], [], [], [], [], [], [], []];
+		this.board = this.updateBoard(this.pieces.active);
 		this.turn = "w";
-		this.player1 = new Player("", "w");
-		this.player2 = new Player("", "b");
-		this.updateBoard = this.updateBoard;
+		this.player1 = new Player("Player 1", "w");
+		this.player2 = new Player("Player 2", "b");
 		this.history = [];
 		this.addPlayer = this.addPlayer;
 		this.started = undefined;
 		this.ended = undefined;
 		this.winner = undefined;
-		this.updateBoard();
+		this.updateBoard = this.updateBoard;
 	}
 
-	updateBoard() {
-		const { active } = this.pieces;
-		const allPieces = active.white.concat(active.black);
+	updateBoard(activePieces) {
+		const { white, black } = activePieces;
+		const allPieces = white.concat(black);
+		let updatedBoard = [[], [], [], [], [], [], [], []];
 
 		for (let y = 0; y < 8; y++) {
 			for (let x = 0; x < 8; x++) {
 				const piece = allPieces.find(
 					({ position }) => position.x === x && position.y === y
 				);
-				this.board[y][x] = new Space(
+				updatedBoard[y][x] = new Space(
 					y,
 					x,
 					piece && { type: "ref", _id: piece._id }
 				);
 			}
 		}
+
+		return updatedBoard;
 	}
 
 	// TODO finish fen generation
