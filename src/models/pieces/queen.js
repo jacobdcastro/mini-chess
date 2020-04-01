@@ -1,5 +1,5 @@
 const Piece = require("../piece");
-const getSpaceIds = require("../../helpers/getSpaceIds");
+const checkIsWhite = require("../../helpers/checkIsWhite");
 
 class Queen extends Piece {
 	constructor(isWhite, position, idNum) {
@@ -8,21 +8,21 @@ class Queen extends Piece {
 		this.getPossibleMoves = this.getPossibleMoves;
 	}
 
-	getPossibleMoves() {
+	getPossibleMoves(board) {
 		let possibleMoves = [];
 		const { x, y } = this.position;
 
-		// ? northward moves
+		// ? northward movement
 		// if y === 7, then piece is on north-side edge
 		// of board, don't look for moves in this direction
 		if (y !== 7) {
 			for (let i = y + 1; i < 8; i++) {
 				const pos = { x, y: i };
-				const { piece } = board[i][x];
+				const { piece } = board[pos.y][pos.x];
 
-				if (piece !== null) {
+				if (piece._id !== null) {
 					// if space is occupied by enemy, add space and break loop
-					if (piece.isWhite !== this.isWhite) {
+					if (checkIsWhite(piece._id) !== this.isWhite) {
 						possibleMoves.push(pos);
 						break;
 					} else {
@@ -42,7 +42,7 @@ class Queen extends Piece {
 
 			if (piece !== null) {
 				// if space is occupied by enemy, add space and break loop
-				if (piece.isWhite !== this.isWhite) {
+				if (checkIsWhite(piece._id) !== this.isWhite) {
 					possibleMoves.push(pos);
 					break;
 				} else {
@@ -63,7 +63,7 @@ class Queen extends Piece {
 
 				if (piece !== null) {
 					// if space is occupied by enemy, add space and break loop
-					if (piece.isWhite !== this.isWhite) {
+					if (checkIsWhite(piece._id) !== this.isWhite) {
 						possibleMoves.push(pos);
 						break;
 					} else {
@@ -83,7 +83,7 @@ class Queen extends Piece {
 
 			if (piece !== null) {
 				// if space is occupied by enemy, add space and break loop
-				if (piece.isWhite !== this.isWhite) {
+				if (checkIsWhite(piece._id) !== this.isWhite) {
 					possibleMoves.push(pos);
 					break;
 				} else {
@@ -104,7 +104,7 @@ class Queen extends Piece {
 
 				if (piece !== null) {
 					// if space is occupied by enemy, add space and break loop
-					if (piece.isWhite !== this.isWhite) {
+					if (checkIsWhite(piece._id) !== this.isWhite) {
 						possibleMoves.push(pos);
 						break;
 					} else {
@@ -124,7 +124,7 @@ class Queen extends Piece {
 
 			if (piece !== null) {
 				// if space is occupied by enemy, add space and break loop
-				if (piece.isWhite !== this.isWhite) {
+				if (checkIsWhite(piece._id) !== this.isWhite) {
 					possibleMoves.push(pos);
 					break;
 				} else {
@@ -145,7 +145,7 @@ class Queen extends Piece {
 
 				if (piece !== null) {
 					// if space is occupied by enemy, add space and break loop
-					if (piece.isWhite !== this.isWhite) {
+					if (checkIsWhite(piece._id) !== this.isWhite) {
 						possibleMoves.push(pos);
 						break;
 					} else {
@@ -165,7 +165,7 @@ class Queen extends Piece {
 
 			if (piece !== null) {
 				// if space is occupied by enemy, add space and break loop
-				if (piece.isWhite !== this.isWhite) {
+				if (checkIsWhite(piece._id) !== this.isWhite) {
 					possibleMoves.push(pos);
 					break;
 				} else {
@@ -176,7 +176,7 @@ class Queen extends Piece {
 			}
 		}
 
-		return getSpaceIds(possibleMoves);
+		return possibleMoves;
 	}
 }
 

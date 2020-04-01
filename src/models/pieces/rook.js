@@ -1,5 +1,5 @@
 const Piece = require("../piece");
-const getSpaceIds = require("../../helpers/getSpaceIds");
+const checkIsWhite = require("../../helpers/checkIsWhite");
 
 class Rook extends Piece {
 	constructor(isWhite, position, idNum) {
@@ -22,7 +22,7 @@ class Rook extends Piece {
 
 				if (piece !== null) {
 					// if space is occupied by enemy, add space and break loop
-					if (piece.isWhite !== this.isWhite) {
+					if (checkIsWhite(piece._id) !== this.isWhite) {
 						possibleMoves.push(pos);
 						break;
 					} else {
@@ -44,7 +44,7 @@ class Rook extends Piece {
 
 				if (piece !== null) {
 					// if space is occupied by enemy, add space and break loop
-					if (piece.isWhite !== this.isWhite) {
+					if (checkIsWhite(piece._id) !== this.isWhite) {
 						possibleMoves.push(pos);
 						break;
 					} else {
@@ -66,7 +66,7 @@ class Rook extends Piece {
 
 				if (piece !== null) {
 					// if space is occupied by enemy, add space and break loop
-					if (piece.isWhite !== this.isWhite) {
+					if (checkIsWhite(piece._id) !== this.isWhite) {
 						possibleMoves.push(pos);
 						break;
 					} else {
@@ -88,7 +88,7 @@ class Rook extends Piece {
 
 				if (piece !== null) {
 					// if space is occupied by enemy, add space and break loop
-					if (piece.isWhite !== this.isWhite) {
+					if (checkIsWhite(piece._id) !== this.isWhite) {
 						possibleMoves.push(pos);
 						break;
 					} else {
@@ -100,7 +100,7 @@ class Rook extends Piece {
 			}
 		}
 
-		return getSpaceIds(possibleMoves);
+		return possibleMoves;
 	}
 }
 

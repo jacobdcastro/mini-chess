@@ -1,5 +1,5 @@
 const Piece = require("../piece");
-const getSpaceIds = require("../../helpers/getSpaceIds");
+const checkIsWhite = require("../../helpers/checkIsWhite");
 
 class Knight extends Piece {
 	constructor(isWhite, position, idNum) {
@@ -29,10 +29,12 @@ class Knight extends Piece {
 			if (move.x < 8 && move.x >= 0 && move.y < 8 && move.y >= 0) {
 				const { piece } = board[move.y][move.x];
 
+				// check if space is occupied by piece
 				if (piece !== null) {
-					// if space is occupied by enemy, add space and break loop
-					if (piece.isWhite !== this.isWhite) {
+					if (checkIsWhite(piece._id) !== this.isWhite) {
 						possibleMoves.push(move);
+					} else if (piece.isWhite === this.isWhite) {
+						possibleMoves.push();
 					}
 				} else {
 					possibleMoves.push(move);
@@ -40,7 +42,7 @@ class Knight extends Piece {
 			}
 		});
 
-		return getSpaceIds(possibleMoves);
+		return possibleMoves;
 	}
 }
 
