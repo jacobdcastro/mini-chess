@@ -44,7 +44,7 @@ class Pawn extends Piece {
 			const pos3 = { x: x - 1, y: y - 1 }; // diagonal capture
 			const pos4 = { x: x + 1, y: y - 1 }; // diagonal capture
 
-			if (this.firstMove) {
+			if (!this.hasMoved) {
 				const space1 = board[pos1.y][pos1.x];
 				if (space1.piece === null) possibleMoves.push(pos1);
 			}
