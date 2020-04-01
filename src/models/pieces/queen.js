@@ -19,8 +19,7 @@ class Queen extends Piece {
 			for (let i = y + 1; i < 8; i++) {
 				const pos = { x, y: i };
 				const { piece } = board[pos.y][pos.x];
-
-				if (piece._id !== null) {
+				if (piece !== null) {
 					// if space is occupied by enemy, add space and break loop
 					if (checkIsWhite(piece._id) !== this.isWhite) {
 						possibleMoves.push(pos);

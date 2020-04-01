@@ -18,8 +18,10 @@ class Piece {
 	}
 
 	move(newCoords) {
-		this.position = newCoords;
+		const { x, y } = newCoords;
+		this.position = { x, y, _id: getSpaceId(y, x) };
 		this.hasMoved = true;
+		return this;
 	}
 }
 

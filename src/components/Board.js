@@ -12,9 +12,13 @@ const {
 const Row = importJsx("../components/Row");
 
 const Board = () => {
-	const { board, pieces } = React.useContext(App.GameContext);
+	const game = React.useContext(App.GameContext);
 	const { player, setPlayer } = React.useContext(App.PlayerContext);
+	const { board, pieces, setGame } = game;
 	const [selectedPossibleMoves, setSelectedPossibleMoves] = React.useState([]);
+	const [selectedPiece, setSelectedPiece] = React.useState();
+	const allPieces = pieces.active.black.concat(pieces.active.white);
+	const curPos = player.cursorPosition;
 
 	// ? listener for user keypresses
 	useInput((input, key) => {
@@ -30,8 +34,29 @@ const Board = () => {
 
 		// reset possible moves array if cursor is moved after piece selection
 		if (selectedPossibleMoves.length > 0 && key.return) {
-			setSelectedPossibleMoves([]);
+			if (player.color === "w") {
+				pieces.active.white
+					.find(p => p._id === selectedPiece._id)
+					.move({ x: curPos.x, y: curPos.y });
+			} else {
+				pieces.active.black
+					.find(p => p._id === selectedPiece._id)
+					.move({ x: curPos.x, y: curPos.y });
+			}
+
+			const updatedBoard = game.updateBoard(pieces.active);
+			setGame({ ...game, board: updatedBoard }); // set game state
+			setSelectedPiece(); // reset selected state
+			setSelectedPossibleMoves([]); //reset selected state
 		} else if (key.return) {
+			// find and set selected piece in state
+			const selectedSpace = board[curPos.y][curPos.x];
+
+			if (selectedSpace.piece) {
+				const piece = allPieces.find(p => p._id === selectedSpace.piece._id);
+				setSelectedPiece(piece);
+			}
+
 			highlightPossibleMoves(
 				pieces,
 				player,

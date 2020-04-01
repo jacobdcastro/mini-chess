@@ -14,13 +14,13 @@ const App = () => {
 	const { game, setGame } = useChessGame();
 
 	const { player1, player2 } = game;
-	const [player, setPlayer] = React.useState(player1);
+	const [player, setPlayer] = React.useState(player2);
 
 	return (
 		<>
 			<Header />
 
-			<GameContext.Provider value={game}>
+			<GameContext.Provider value={{ ...game, setGame }}>
 				<PlayerContext.Provider value={{ player1, player2, setPlayer, player }}>
 					<GameView player={player} />
 				</PlayerContext.Provider>
