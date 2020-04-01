@@ -8,7 +8,7 @@ It's very object-oriented using lots of classes and methods to make things work.
 
 It also features a custom `useChessGame` React hook. YES. React.
 
-This game uses (Ink)[https://github.com/vadimdemedes/ink] to generate the cli view with React. Take a look around the repo, you'll see what I mean. I love it.
+This game uses [Ink](https://github.com/vadimdemedes/ink) to generate the cli view with React. Take a look around the repo, you'll see what I mean. I love it.
 
 ## Test out the game!
 
