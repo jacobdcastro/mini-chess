@@ -1,6 +1,7 @@
 const React = require("react");
 const { Box, Color, useInput } = require("ink");
 const importJsx = require("import-jsx");
+const Move = require("../models/move");
 const App = require("./App");
 const {
 	moveCursor,
@@ -8,17 +9,40 @@ const {
 	highlightPossibleMoves,
 	moveCursorOnPossibleMoves
 } = require("../helpers/cursorActions");
+const botMovePiece = require("../helpers/botAI");
 
 const Row = importJsx("../components/Row");
 
 const Board = () => {
 	const game = React.useContext(App.GameContext);
-	const { player, setPlayer } = React.useContext(App.PlayerContext);
-	const { board, pieces, setGame } = game;
+	const { player, setPlayer, player2 } = React.useContext(App.PlayerContext);
+	const { board, pieces, setGame, isWhiteTurn } = game;
 	const [selectedPossibleMoves, setSelectedPossibleMoves] = React.useState([]);
 	const [selectedPiece, setSelectedPiece] = React.useState();
 	const allPieces = pieces.active.black.concat(pieces.active.white);
 	const curPos = player.cursorPosition;
+
+	const updateStateAfterMove = newGameData => {
+		setGame({ ...game, ...newGameData }); // set game state
+		setSelectedPiece(); // reset selected state
+		setSelectedPossibleMoves([]); //reset selected state
+	};
+
+	const movePiece = (piece, newCoords) => {
+		const move = new Move(board, piece, newCoords);
+		const newGameData = game.updateGame(move);
+		updateStateAfterMove(newGameData);
+	};
+
+	const initBotMove = () => {
+		botMovePiece(board, pieces, player2, movePiece);
+	};
+
+	React.useEffect(() => {
+		setTimeout(() => {
+			if (!isWhiteTurn) initBotMove();
+		}, 500);
+	}, [isWhiteTurn]);
 
 	// ? listener for user keypresses
 	useInput((input, key) => {
@@ -34,20 +58,20 @@ const Board = () => {
 
 		// reset possible moves array if cursor is moved after piece selection
 		if (selectedPossibleMoves.length > 0 && key.return) {
+			let selectedPieceData;
+			let selectedPieceNewCoords;
 			if (player.color === "w") {
-				pieces.active.white
-					.find(p => p._id === selectedPiece._id)
-					.move({ x: curPos.x, y: curPos.y });
+				selectedPieceData = pieces.active.white.find(
+					p => p._id === selectedPiece._id
+				);
+				selectedPieceNewCoords = { x: curPos.x, y: curPos.y };
 			} else {
-				pieces.active.black
-					.find(p => p._id === selectedPiece._id)
-					.move({ x: curPos.x, y: curPos.y });
+				selectedPieceData = pieces.active.black.find(
+					p => p._id === selectedPiece._id
+				);
+				selectedPieceNewCoords = { x: curPos.x, y: curPos.y };
 			}
-
-			const updatedBoard = game.updateBoard(pieces.active);
-			setGame({ ...game, board: updatedBoard }); // set game state
-			setSelectedPiece(); // reset selected state
-			setSelectedPossibleMoves([]); //reset selected state
+			movePiece(selectedPieceData, { x: curPos.x, y: curPos.y });
 		} else if (key.return) {
 			// find and set selected piece in state
 			const selectedSpace = board[curPos.y][curPos.x];
@@ -69,7 +93,6 @@ const Board = () => {
 
 	const displayBoard = () => {
 		let rows = [];
-
 		// if player is playing as white, flip board
 		// so white shows at bottom
 		if (player.color === "w") {
@@ -96,7 +119,6 @@ const Board = () => {
 				);
 			}
 		}
-
 		return rows;
 	};
 
@@ -126,7 +148,7 @@ const Board = () => {
 	};
 
 	return (
-		<Box marginRight={3} marginLeft={3} flexDirection="column">
+		<Box marginRight={3} flexDirection="column">
 			<Box flexDirection="row">
 				<Box flexDirection="column-reverse" alignItems="center" marginRight={1}>
 					{showCoordinates(1)}
