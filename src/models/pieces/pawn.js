@@ -1,8 +1,9 @@
 const Piece = require("../piece");
+const checkIsWhite = require("../../helpers/checkIsWhite");
 
 class Pawn extends Piece {
 	constructor(isWhite, position, idNum) {
-		super(isWhite, position, "♟ ", "♙ ");
+		super(isWhite, position, "♟ ", "♙ ", 1);
 		this._id = (isWhite ? "P" : "p") + idNum.toString();
 		this.getPossibleMoves = this.getPossibleMoves;
 	}
@@ -27,14 +28,20 @@ class Pawn extends Piece {
 
 			if (x !== 7) {
 				const space3 = board[pos3.y][pos3.x];
-				if (space3.piece !== null && space3.piece.isWhite !== this.isWhite) {
+				if (
+					space3.piece !== null &&
+					checkIsWhite(space3.piece._id) !== this.isWhite
+				) {
 					possibleMoves.push(pos3);
 				}
 			}
 
 			if (x !== 0) {
 				const space4 = board[pos4.y][pos4.x];
-				if (space4.piece !== null && space4.piece.isWhite !== this.isWhite) {
+				if (
+					space4.piece !== null &&
+					checkIsWhite(space4.piece._id) !== this.isWhite
+				) {
 					possibleMoves.push(pos4);
 				}
 			}
@@ -54,14 +61,20 @@ class Pawn extends Piece {
 
 			if (x !== 0) {
 				const space3 = board[pos3.y][pos3.x];
-				if (space3.piece !== null && space3.piece.isWhite !== this.isWhite) {
+				if (
+					space3.piece !== null &&
+					checkIsWhite(space3.piece._id) !== this.isWhite
+				) {
 					possibleMoves.push(pos3);
 				}
 			}
 
 			if (x !== 7) {
 				const space4 = board[pos4.y][pos4.x];
-				if (space4.piece !== null && space4.piece.isWhite !== this.isWhite) {
+				if (
+					space4.piece !== null &&
+					checkIsWhite(space4.piece._id) !== this.isWhite
+				) {
 					possibleMoves.push(pos4);
 				}
 			}

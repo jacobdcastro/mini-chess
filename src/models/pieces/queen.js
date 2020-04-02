@@ -3,7 +3,7 @@ const checkIsWhite = require("../../helpers/checkIsWhite");
 
 class Queen extends Piece {
 	constructor(isWhite, position, idNum) {
-		super(isWhite, position, "♛ ", "♕ ");
+		super(isWhite, position, "♛ ", "♕ ", 9);
 		this._id = (isWhite ? "Q" : "q") + idNum.toString();
 		this.getPossibleMoves = this.getPossibleMoves;
 	}

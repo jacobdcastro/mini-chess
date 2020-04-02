@@ -3,7 +3,7 @@ const checkIsWhite = require("../../helpers/checkIsWhite");
 
 class Bishop extends Piece {
 	constructor(isWhite, position, idNum) {
-		super(isWhite, position, "♝ ", "♗ ");
+		super(isWhite, position, "♝ ", "♗ ", 3);
 		this._id = (isWhite ? "B" : "b") + idNum.toString();
 		this.getPossibleMoves = this.getPossibleMoves;
 	}
