@@ -6,8 +6,7 @@ const { getBoardSnapshot, checkCastling } = require("../helpers/fen");
 class Game {
 	constructor() {
 		this.pieces = new Pieces();
-		this.board = this.updateBoard(this.pieces.active);
-		this.turn = "w";
+		this.isWhiteTurn = true;
 		this.player1 = new Player("Player 1", "w");
 		this.player2 = new Player("Player 2", "b");
 		this.history = [];
@@ -15,14 +14,38 @@ class Game {
 		this.started = undefined;
 		this.ended = undefined;
 		this.winner = undefined;
-		this.updateBoard = this.updateBoard;
+		this.updateGame = this.updateGame;
+		this.board = this.createInitBoard();
 	}
 
-	updateBoard(activePieces) {
-		const { white, black } = activePieces;
+	createInitBoard() {
+		let newBoard = [[], [], [], [], [], [], [], []];
+		const { white, black } = this.pieces.active;
 		const allPieces = white.concat(black);
-		let updatedBoard = [[], [], [], [], [], [], [], []];
 
+		for (let y = 0; y < 8; y++) {
+			for (let x = 0; x < 8; x++) {
+				const piece = allPieces.find(
+					({ position }) => position.x === x && position.y === y
+				);
+				newBoard[y][x] = new Space(
+					y,
+					x,
+					piece && { type: "ref", _id: piece._id }
+				);
+			}
+		}
+
+		return newBoard;
+	}
+
+	updateGame(move) {
+		if (move) this.pieces.initializeMove(move);
+		const { white, black } = this.pieces.active;
+		const allPieces = white.concat(black);
+
+		// create new board
+		let updatedBoard = [[], [], [], [], [], [], [], []];
 		for (let y = 0; y < 8; y++) {
 			for (let x = 0; x < 8; x++) {
 				const piece = allPieces.find(
@@ -36,12 +59,18 @@ class Game {
 			}
 		}
 
-		return updatedBoard;
+		this.board = updatedBoard;
+
+		if (move) {
+			this.isWhiteTurn = !this.isWhiteTurn;
+			// this.updateHistory(move);
+			return this;
+		}
 	}
 
 	// TODO finish fen generation
 	// https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
-	updateHistory() {
+	updateHistory(move) {
 		let fen = "";
 		const timestamp = new Date();
 
@@ -66,6 +95,7 @@ class Game {
 				this.players.push(new Player(name, "w"));
 			}
 		} else this.players.push(new Player(name, color));
+		return this;
 	}
 }
 

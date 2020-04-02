@@ -1,7 +1,7 @@
 const getSpaceId = require("../helpers/getSpaceId");
 
 class Piece {
-	constructor(isWhite, position, imgW, imgB) {
+	constructor(isWhite, position, imgW, imgB, value) {
 		this.isWhite = isWhite;
 		this.position = position;
 		this.position._id = getSpaceId(position.y, position.x);
@@ -10,11 +10,13 @@ class Piece {
 		this.capture = this.capture;
 		this.hasMoved = false;
 		this.move = this.move;
+		this.value = value;
 	}
 
 	capture() {
 		this.isCaptured = true;
 		this.position = undefined;
+		return this;
 	}
 
 	move(newCoords) {

@@ -37,6 +37,43 @@ class Pieces {
 		};
 	}
 
+	initializeMove(move) {
+		const {
+			movedPieceIsWhite,
+			movedPieceId,
+			startingLocation,
+			endingLocation,
+			capturedPieceId
+		} = move;
+		let selectedPiece;
+		let capturedPiece;
+
+		if (movedPieceIsWhite) {
+			selectedPiece = this.active.white.find(p => p._id === movedPieceId);
+		} else {
+			selectedPiece = this.active.black.find(p => p._id === movedPieceId);
+		}
+
+		selectedPiece.move(endingLocation);
+
+		if (capturedPieceId !== null) {
+			if (movedPieceIsWhite) {
+				capturedPiece = this.active.black.find(p => p._id === capturedPieceId);
+				this.captured.black.push(capturedPiece);
+				this.active.black = this.active.black.filter(
+					p => p._id !== capturedPieceId
+				);
+			} else {
+				capturedPiece = this.active.white.find(p => p._id === capturedPieceId);
+				this.captured.white.push(capturedPiece);
+				this.active.white = this.active.white.filter(
+					p => p._id !== capturedPieceId
+				);
+			}
+			// capturedPiece.capture();
+		}
+	}
+
 	addInitialPawns() {
 		// white pawns
 		for (let i = 0; i < 8; i++) {
