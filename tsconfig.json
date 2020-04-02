@@ -1,0 +1,9 @@
+{
+	"include": ["src/**/*"],
+	"exclude": ["node_modules", "src/@types"],
+	"compilerOptions": {
+		"noImplicitAny": false,
+		"target": "es5",
+		"jsx": "react"
+	}
+}
