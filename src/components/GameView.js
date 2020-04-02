@@ -11,7 +11,7 @@ const GameView = ({ player }) => {
 
 	// if (player) {
 	return (
-		<Box height={15}>
+		<Box justifyContent="center" height={15}>
 			<Board />
 			<Stats />
 		</Box>
