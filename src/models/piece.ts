@@ -1,9 +1,17 @@
-const getSpaceId = require("../helpers/getSpaceId");
+import getSpaceId from "../helpers/getSpaceId";
+import Position from "../@types/Position";
 
 class Piece {
-	constructor(isWhite, position, imgW, imgB, value) {
-		this.isWhite = isWhite;
-		this.position = position;
+	constructor(
+		public isWhite: Boolean,
+		public position: Position,
+		imgW: String,
+		imgB: String,
+		public value: Number,
+		public hasMoved?: Boolean,
+		public icon?: String,
+		public isCaptured?: Boolean
+	) {
 		this.position._id = getSpaceId(position.y, position.x);
 		this.isCaptured = false;
 		this.icon = isWhite ? imgW : imgB;
@@ -19,7 +27,7 @@ class Piece {
 		return this;
 	}
 
-	move(newCoords) {
+	move(newCoords: Position) {
 		const { x, y } = newCoords;
 		this.position = { x, y, _id: getSpaceId(y, x) };
 		this.hasMoved = true;
@@ -27,4 +35,4 @@ class Piece {
 	}
 }
 
-module.exports = Piece;
+export default Piece;

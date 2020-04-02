@@ -7,4 +7,4 @@ const getSpaceIds = coords => {
 	return ids;
 };
 
-module.exports = getSpaceIds;
+export default getSpaceIds;
