@@ -1,5 +1,5 @@
 const examineAllPossibleMoves = (board, pieces, player) => {
-  let allMovablePieces = [];
+  let allMovablePieces: object[] = [];
   const allColorPieces =
     player.color === 'w' ? pieces.active.white : pieces.active.black;
 
