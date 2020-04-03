@@ -1,0 +1,1 @@
+"use strict";var getSpaceId=function(e,r){return String.fromCharCode(97+r)+(e+1)};module.exports=getSpaceId;

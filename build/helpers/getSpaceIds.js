@@ -1,0 +1,1 @@
+"use strict";var getSpaceIds=function(e){return e.map(function(e){return String.fromCharCode(97+e.x)+(e.y+1)})};module.exports=getSpaceIds;

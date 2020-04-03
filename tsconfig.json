@@ -1,17 +1,16 @@
 {
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "src/@types"],
+  "exclude": ["src/@types", "src/__tests__"],
   "compilerOptions": {
     "noImplicitAny": false,
-    "target": "ES3",
+    "target": "ES6",
     "strict": true,
-    "jsx": "react",
-    "removeComments": true,
+    "jsx": "preserve",
     "sourceMap": true,
     "allowJs": true,
     "allowSyntheticDefaultImports": false,
     "esModuleInterop": true,
     "alwaysStrict": true,
-    "resolveJsonModule": true
+    "moduleResolution": "Node"
   }
 }

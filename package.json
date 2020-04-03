@@ -55,12 +55,6 @@
       "@babel/register"
     ]
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ]
-  },
   "xo": {
     "extends": "xo-react"
   }
