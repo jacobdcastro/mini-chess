@@ -9,8 +9,8 @@
     "node": ">=8"
   },
   "scripts": {
-    "start": "rm -rf dist && gulp && node dist/cli.js",
-    "build": "gulp",
+    "start": "gulp transpileTsJs && node public/cli.js",
+    "build": "gulp && node build/cli.js",
     "lint": "eslint src/**/**/*.js",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\" \"!node_modules/**\" \"!dist/**\"",
     "test": "xo && ava"
