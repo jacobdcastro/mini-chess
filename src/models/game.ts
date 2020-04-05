@@ -2,12 +2,12 @@ import Pieces from './pieces';
 import Space from './space';
 import Player from './player';
 import { getBoardSnapshot, checkCastling } from '../helpers/fen';
-import { Color, HistoryItem, Board } from '../helpers/interfaces';
+import { HistoryItem, Board } from '../helpers/interfaces';
 import Move from './move';
 
 class Game {
   public pieces: Pieces;
-  public turn: Color;
+  public isWhiteTurn: boolean;
   public player1: Player;
   public player2: Player;
   public history: HistoryItem[];
@@ -18,7 +18,7 @@ class Game {
 
   constructor() {
     this.pieces = new Pieces();
-    this.turn = 'w';
+    this.isWhiteTurn = true;
     this.player1 = new Player('Player 1', 'w');
     this.player2 = new Player('Player 2', 'b');
     this.history = [];
@@ -75,7 +75,7 @@ class Game {
     this.board = updatedBoard;
 
     if (move) {
-      this.turn = this.turn === 'w' ? 'b' : 'w';
+      this.isWhiteTurn = !this.isWhiteTurn;
       // this.updateHistory(move);
       return this;
     }
@@ -91,7 +91,7 @@ class Game {
     fen += getBoardSnapshot(this.board);
 
     // which color's turn
-    fen += ' ' + this.turn + ' ';
+    fen += ' ' + this.isWhiteTurn + ' ';
 
     // determine castling abilities
     fen += checkCastling(this.pieces);

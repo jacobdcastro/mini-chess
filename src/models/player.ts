@@ -4,6 +4,7 @@ class Player {
   isHuman: boolean | undefined;
   online: boolean;
   cursorPosition: Position;
+  // getNewPos: () => {};
 
   constructor(public name: string, public color: Color) {
     this.name = name;
@@ -13,7 +14,7 @@ class Player {
     this.changeName = this.changeName;
     this.setHumanity = this.setHumanity;
     this.cursorPosition = color === 'w' ? { x: 0, y: 0 } : { x: 0, y: 7 };
-    this.getNewPos = this.getNewPos;
+    // this.getNewPos = this.getNewPos;
   }
 
   changeName(newName: string) {
