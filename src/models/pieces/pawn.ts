@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Piece from '../piece';
 import checkIsWhite from '../../helpers/checkIsWhite';
 

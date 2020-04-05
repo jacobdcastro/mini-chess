@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Pieces from './pieces';
 import Space from './space';
 import Player from './player';

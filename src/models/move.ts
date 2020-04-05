@@ -1,3 +1,4 @@
+// @ts-nocheck
 import getSpaceId from '../helpers/getSpaceId';
 
 class Move {

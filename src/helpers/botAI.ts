@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Position } from '../@types/Position';
 
 interface MovablePiece {

@@ -1,3 +1,4 @@
+// @ts-nocheck
 export const getBoardSnapshot = board => {
   let str = '';
 

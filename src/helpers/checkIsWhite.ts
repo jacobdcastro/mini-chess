@@ -1,3 +1,4 @@
+// @ts-nocheck
 const checkIsWhite = (_id: string) => {
   // test
   if (_id[0] == _id[0].toLowerCase()) {

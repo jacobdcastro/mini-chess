@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import { Color } from 'ink';
 import App from './App';

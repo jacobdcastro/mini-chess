@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Piece from '../piece';
 import { Position, Board } from '../../helpers/interfaces';
 import checkIsWhite from '../../helpers/checkIsWhite';

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import getSpaceId from '../helpers/getSpaceId';
 import { Position } from '../@types/Position';
 import { PieceIcon, PieceValue } from '../@types/PieceRef';

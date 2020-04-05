@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import { Box, Text, Color } from 'ink';
 import InkBox from 'ink-box';
@@ -63,4 +64,4 @@ const Stats = () => {
   );
 };
 
-module.exports = Stats;
+export default Stats;

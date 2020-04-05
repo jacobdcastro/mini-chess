@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import App from './App';
 import { Box, Text, useInput } from 'ink';

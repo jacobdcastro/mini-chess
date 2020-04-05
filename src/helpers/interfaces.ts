@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Piece from '../models/piece';
 import Space from '../models/space';
 

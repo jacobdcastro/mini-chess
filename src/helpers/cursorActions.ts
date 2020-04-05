@@ -1,3 +1,4 @@
+// @ts-nocheck
 export const moveCursor = (input, key, player) => {
   const { x, y } = player.cursorPosition;
 

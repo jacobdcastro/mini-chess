@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Pawn from './pieces/pawn';
 import Bishop from './pieces/bishop';
 import Knight from './pieces/knight';

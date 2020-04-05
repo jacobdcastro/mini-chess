@@ -1,3 +1,4 @@
+// @ts-nocheck
 import getSpaceId from '../helpers/getSpaceId';
 import { Position, PieceRef } from '../helpers/interfaces';
 

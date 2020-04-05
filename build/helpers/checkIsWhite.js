@@ -1,1 +1,0 @@
-"use strict";var checkIsWhite=function(e){return e[0]!=e[0].toLowerCase()};module.exports=checkIsWhite;

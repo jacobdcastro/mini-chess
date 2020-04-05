@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import { Box, Text, Color, useInput } from 'ink';
 import Outline from 'ink-box';
