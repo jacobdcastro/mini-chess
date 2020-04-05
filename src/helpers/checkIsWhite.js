@@ -1,4 +1,4 @@
-const checkIsWhite = (_id: string) => {
+const checkIsWhite = _id => {
   // test
   if (_id[0] == _id[0].toLowerCase()) {
     return false;

@@ -4,7 +4,7 @@ const { Box, Color, useInput } = require('ink');
 const importJsx = require('import-jsx');
 const Move = require('../models/move');
 const App = require('./App');
-const { moveCursor, cursorDidMove, highlightPossibleMoves, moveCursorOnPossibleMoves, } = require('../helpers/cursorActions');
+const { moveCursor, cursorDidMove, highlightPossibleMoves, moveCursorOnPossibleMoves, } = require('../helpers/cursorActions.js');
 const botMovePiece = require('../helpers/botAI');
 const Row = importJsx('../components/Row');
 const Board = () => {

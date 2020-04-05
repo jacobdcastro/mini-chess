@@ -8,7 +8,7 @@ const {
   cursorDidMove,
   highlightPossibleMoves,
   moveCursorOnPossibleMoves,
-} = require('../helpers/cursorActions');
+} = require('../helpers/cursorActions.js');
 const botMovePiece = require('../helpers/botAI');
 
 const Row = importJsx('../components/Row');
