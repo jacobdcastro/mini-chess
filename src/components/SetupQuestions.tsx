@@ -1,12 +1,12 @@
 // @ts-nocheck
 import * as React from 'react';
-import App from './App';
+import { PlayerContext } from './App';
 import { Box, Text, useInput } from 'ink';
 import TextInput from 'ink-text-input';
 import SelectInput from 'ink-select-input';
 
 const SetupQuestions = () => {
-  const { player1, player2, setPlayer } = React.useContext(App.PlayerContext);
+  const { player1, player2, setPlayer } = React.useContext(PlayerContext);
   const [playerInfo, setPlayerInfo] = React.useState({
     name: '',
     color: '',

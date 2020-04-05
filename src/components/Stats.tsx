@@ -1,17 +1,15 @@
 // @ts-nocheck
 import * as React from 'react';
 import { Box, Text, Color } from 'ink';
-import InkBox from 'ink-box';
-import App from './App';
+import { PlayerContext, GameContext } from './App';
 import getSpaceId from '../helpers/getSpaceId';
 
 // box props
 const fdc = { flexDirection: 'column', width: 16 };
-const fdr = { flexDirection: 'row' };
 
 const Stats = () => {
-  const { player, player2 } = React.useContext(App.PlayerContext);
-  const { pieces } = React.useContext(App.GameContext);
+  const { player, player2 } = React.useContext(PlayerContext);
+  const { pieces } = React.useContext(GameContext);
 
   return (
     <Box {...fdc}>

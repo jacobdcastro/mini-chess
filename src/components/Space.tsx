@@ -1,12 +1,12 @@
 // @ts-nocheck
 import * as React from 'react';
 import { Color } from 'ink';
-import App from './App';
+import { GameContext, PlayerContext } from './App';
 
 const Space = ({ space, defaultSpaceColor, selectedPossibleMoves }) => {
   const [piece, setPiece] = React.useState(null);
-  const { pieces } = React.useContext(App.GameContext);
-  const { player } = React.useContext(App.PlayerContext);
+  const { pieces } = React.useContext(GameContext);
+  const { player } = React.useContext(PlayerContext);
   const allPieces = pieces.active.black.concat(pieces.active.white);
 
   // check if space if a possible move for selected piece

@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Box, Color, useInput } from 'ink';
 import Move from '../models/move';
-import App from './App';
+import { GameContext, PlayerContext } from './App';
 import {
   moveCursor,
   cursorDidMove,
@@ -14,8 +14,8 @@ import botMovePiece from '../helpers/botAI';
 import Row from './Row';
 
 const Board = () => {
-  const game: any = React.useContext(App.GameContext);
-  const { player, setPlayer, player2 } = React.useContext(App.PlayerContext);
+  const game: any = React.useContext(GameContext);
+  const { player, setPlayer, player2 } = React.useContext(PlayerContext);
   const { board, pieces, setGame, isWhiteTurn } = game;
   const [selectedPossibleMoves, setSelectedPossibleMoves] = React.useState([]);
   const [selectedPiece, setSelectedPiece] = React.useState({});
