@@ -1,4 +1,3 @@
-// @ts-nocheck
 import Piece from '../piece';
 import { Position, Board } from '../../helpers/interfaces';
 import checkIsWhite from '../../helpers/checkIsWhite';
@@ -6,7 +5,7 @@ import checkIsWhite from '../../helpers/checkIsWhite';
 class Knight extends Piece {
   public _id: string;
 
-  constructor(isWhite: boolean, position: Position, idNum: string) {
+  constructor(isWhite: boolean, position: Position, idNum: 1 | 2) {
     super(isWhite, position, '♞ ', '♘ ', 3);
     this._id = (isWhite ? 'N' : 'n') + idNum.toString();
     this.getPossibleMoves = this.getPossibleMoves;
@@ -37,8 +36,6 @@ class Knight extends Piece {
         if (piece !== null) {
           if (checkIsWhite(piece._id) !== this.isWhite) {
             possibleMoves.push(move);
-          } else if (piece.isWhite === this.isWhite) {
-            possibleMoves.push();
           }
         } else {
           possibleMoves.push(move);

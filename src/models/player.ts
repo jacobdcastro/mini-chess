@@ -1,9 +1,14 @@
-// @ts-nocheck
+import { Color, Position } from '../helpers/interfaces';
+
 class Player {
-  constructor(name, color) {
+  isHuman: boolean | undefined;
+  online: boolean;
+  cursorPosition: Position;
+
+  constructor(public name: string, public color: Color) {
     this.name = name;
     this.color = color;
-    this.online = undefined;
+    this.online = true;
     this.isHuman = undefined;
     this.changeName = this.changeName;
     this.setHumanity = this.setHumanity;
@@ -11,11 +16,11 @@ class Player {
     this.getNewPos = this.getNewPos;
   }
 
-  changeName(newName) {
+  changeName(newName: string) {
     this.name = newName;
   }
 
-  setHumanity(isHuman) {
+  setHumanity(isHuman: boolean) {
     this.isHuman = isHuman;
   }
 }

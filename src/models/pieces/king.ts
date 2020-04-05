@@ -1,7 +1,6 @@
-// @ts-nocheck
 import Piece from '../piece';
-import { Position } from '../../@types/Position';
 import checkIsWhite from '../../helpers/checkIsWhite';
+import { Position, Board } from '../../helpers/interfaces';
 
 class King extends Piece {
   _id: string;
@@ -14,8 +13,8 @@ class King extends Piece {
     this.getPossibleMoves = this.getPossibleMoves;
   }
 
-  getPossibleMoves(board) {
-    let possibleMoves = [];
+  getPossibleMoves(board: Board) {
+    let possibleMoves: Position[] = [];
     const { x, y } = this.position;
 
     // all possible king moves, in clockwise order

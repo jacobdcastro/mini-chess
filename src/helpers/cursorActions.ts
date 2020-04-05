@@ -1,5 +1,15 @@
-// @ts-nocheck
-export const moveCursor = (input, key, player) => {
+import Player from '../models/player';
+import { Board, Position, AnyPiece } from './interfaces';
+import Pieces from '../models/pieces';
+
+interface InputKey {
+  upArrow: boolean;
+  downArrow: boolean;
+  leftArrow: boolean;
+  rightArrow: boolean;
+}
+
+export const moveCursor = (input: string, key: InputKey, player: Player) => {
   const { x, y } = player.cursorPosition;
 
   if (key.upArrow || input === 'w') {
@@ -20,7 +30,7 @@ export const moveCursor = (input, key, player) => {
   return { x, y };
 };
 
-export const cursorDidMove = (input, key) => {
+export const cursorDidMove = (input: string, key: InputKey) => {
   if (
     key.upArrow ||
     key.downArrow ||
@@ -39,14 +49,14 @@ export const cursorDidMove = (input, key) => {
 
 // sets the state in Board.js to highlight spaces for selected piece
 export const highlightPossibleMoves = (
-  pieces,
-  player,
-  setPlayer,
-  setSelectedPossibleMoves,
-  board
+  pieces: Pieces,
+  player: Player,
+  setPlayer: (object: object) => {},
+  setSelectedPossibleMoves: (possibleMoves: Position[]) => {},
+  board: Board
 ) => {
   const { white, black } = pieces.active;
-  const allPieces = white.concat(black);
+  const allPieces: AnyPiece[] = white.concat(black);
   const { x, y } = player.cursorPosition;
 
   // find selected piece from cursor position
@@ -56,7 +66,7 @@ export const highlightPossibleMoves = (
 
   if (selectedPiece) {
     // calculate possible moves for selected piece
-    const possibleMoves = selectedPiece.getPossibleMoves(board);
+    const possibleMoves: Position[] = selectedPiece.getPossibleMoves(board);
 
     if (possibleMoves.length > 0) {
       // set state with array of possible moves
@@ -69,17 +79,17 @@ export const highlightPossibleMoves = (
 };
 
 export const moveCursorOnPossibleMoves = (
-  selectedPossibleMoves,
-  player,
-  setPlayer,
-  key
+  selectedPossibleMoves: Position[],
+  player: Player,
+  setPlayer: (object: object) => {},
+  key: InputKey
 ) => {
-  let curPos = player.cursorPosition;
-  let newPos;
+  let curPos: Position = player.cursorPosition;
+  let newPos: Position | null = null;
 
   if (key.upArrow) {
     for (let _y = 1; _y <= 2; _y++) {
-      const yAxisPos = { y: curPos.y + _y, x: curPos.x };
+      const yAxisPos: Position = { y: curPos.y + _y, x: curPos.x };
 
       const validSpace = selectedPossibleMoves.find(
         m => m.y === yAxisPos.y && m.x === yAxisPos.x

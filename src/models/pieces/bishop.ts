@@ -1,4 +1,3 @@
-// @ts-nocheck
 import Piece from '../piece';
 import { Position, Board } from '../../helpers/interfaces';
 import checkIsWhite from '../../helpers/checkIsWhite';
@@ -18,7 +17,7 @@ class Bishop extends Piece {
 
     // ? northeast movement
     for (let i = 1; i < 8; i++) {
-      const pos = { x: x + i, y: y + i };
+      const pos: Position = { x: x + i, y: y + i };
       if (pos.x >= 8 || pos.y >= 8) break; // if off-board, break loop
       const { piece } = board[pos.y][pos.x];
 
@@ -37,7 +36,7 @@ class Bishop extends Piece {
 
     // ? northwest movement
     for (let i = 1; i < 8; i++) {
-      const pos = { x: x - i, y: y + i };
+      const pos: Position = { x: x - i, y: y + i };
       if (pos.x < 0 || pos.y >= 8) break; // if off-board, break loop
       const { piece } = board[pos.y][pos.x];
 
@@ -56,7 +55,7 @@ class Bishop extends Piece {
 
     // ? southwest movement
     for (let i = 1; i < 8; i++) {
-      const pos = { x: x - i, y: y - i };
+      const pos: Position = { x: x - i, y: y - i };
       if (pos.x < 0 || pos.y < 0) break; // if off-board, break loop
       const { piece } = board[pos.y][pos.x];
 
@@ -75,7 +74,7 @@ class Bishop extends Piece {
 
     // ? southeast movement
     for (let i = 1; i < 8; i++) {
-      const pos = { x: x + i, y: y - i };
+      const pos: Position = { x: x + i, y: y - i };
       if (pos.x >= 8 || pos.y < 0) break; // if off-board, break loop
       const { piece } = board[pos.y][pos.x];
 

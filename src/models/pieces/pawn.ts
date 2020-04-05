@@ -1,23 +1,25 @@
-// @ts-nocheck
 import Piece from '../piece';
 import checkIsWhite from '../../helpers/checkIsWhite';
+import { Position, Board } from '../../helpers/interfaces';
 
 class Pawn extends Piece {
-  constructor(isWhite, position, idNum) {
+  public _id: string;
+
+  constructor(isWhite: boolean, position: Position, idNum: number) {
     super(isWhite, position, '♟ ', '♙ ', 1);
     this._id = (isWhite ? 'P' : 'p') + idNum.toString();
     this.getPossibleMoves = this.getPossibleMoves;
   }
 
-  getPossibleMoves(board) {
-    let possibleMoves = [];
+  getPossibleMoves(board: Board) {
+    let possibleMoves: Position[] = [];
     const { x, y } = this.position;
 
     if (this.isWhite) {
-      const pos1 = { x, y: y + 2 }; // 2-space move
-      const pos2 = { x, y: y + 1 }; // 1-space move
-      const pos3 = { x: x + 1, y: y + 1 }; // diagonal capture
-      const pos4 = { x: x - 1, y: y + 1 }; // diagonal capture
+      const pos1: Position = { x, y: y + 2 }; // 2-space move
+      const pos2: Position = { x, y: y + 1 }; // 1-space move
+      const pos3: Position = { x: x + 1, y: y + 1 }; // diagonal capture
+      const pos4: Position = { x: x - 1, y: y + 1 }; // diagonal capture
 
       if (!this.hasMoved) {
         const space1 = board[pos1.y][pos1.x];
@@ -47,10 +49,10 @@ class Pawn extends Piece {
         }
       }
     } else {
-      const pos1 = { x, y: y - 2 }; // 2-space move
-      const pos2 = { x, y: y - 1 }; // 1-space move
-      const pos3 = { x: x - 1, y: y - 1 }; // diagonal capture
-      const pos4 = { x: x + 1, y: y - 1 }; // diagonal capture
+      const pos1: Position = { x, y: y - 2 }; // 2-space move
+      const pos2: Position = { x, y: y - 1 }; // 1-space move
+      const pos3: Position = { x: x - 1, y: y - 1 }; // diagonal capture
+      const pos4: Position = { x: x + 1, y: y - 1 }; // diagonal capture
 
       if (!this.hasMoved) {
         const space1 = board[pos1.y][pos1.x];

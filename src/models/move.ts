@@ -1,20 +1,30 @@
-// @ts-nocheck
 import getSpaceId from '../helpers/getSpaceId';
+import { Board, Position, AnyPiece } from '../helpers/interfaces';
 
 class Move {
-  constructor(board, piece, newCoords) {
-    this.movedPieceIsWhite = piece.isWhite;
-    this.movedPieceId = piece._id;
+  movedPieceIsWhite: boolean;
+  movedPieceId: string;
+  startingLocation: Position;
+  endingLocation: Position;
+  capturedPieceId: string | null;
+
+  constructor(
+    private board: Board,
+    private piece: AnyPiece,
+    private newCoords: Position
+  ) {
+    this.movedPieceIsWhite = this.piece.isWhite;
+    this.movedPieceId = this.piece._id;
     this.startingLocation = piece.position;
     this.startingLocation._id = getSpaceId(piece.position.y, piece.position.x);
-    this.endingLocation = newCoords;
+    this.endingLocation = this.newCoords;
     this.endingLocation._id = getSpaceId(newCoords.y, newCoords.x);
-    this.capturedPieceId = this.getCapturedPiece(board);
+    this.capturedPieceId = this.getCapturedPiece();
   }
 
-  getCapturedPiece(board) {
+  getCapturedPiece() {
     const { x, y } = this.endingLocation;
-    const { piece } = board[y][x];
+    const { piece } = this.board[y][x];
     return piece ? piece._id : null;
   }
 }

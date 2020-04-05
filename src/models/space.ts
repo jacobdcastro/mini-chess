@@ -1,4 +1,3 @@
-// @ts-nocheck
 import getSpaceId from '../helpers/getSpaceId';
 import { Position, PieceRef } from '../helpers/interfaces';
 
@@ -7,7 +6,7 @@ class Space {
   public _id: string;
   public position: Position;
 
-  constructor(y: number, x: number, piece: PieceRef) {
+  constructor(y: number, x: number, piece: PieceRef | null) {
     this._id = getSpaceId(y, x);
     this.position = { x, y };
     this.piece = piece ? piece : null;

@@ -1,16 +1,17 @@
-// @ts-nocheck
 import Piece from '../piece';
 import checkIsWhite from '../../helpers/checkIsWhite';
+import { Position, Board } from '../../helpers/interfaces';
 
 class Rook extends Piece {
-  constructor(isWhite, position, idNum) {
+  public _id: string;
+  constructor(isWhite: boolean, public position: Position, idNum: number) {
     super(isWhite, position, '♜ ', '♖ ', 5);
     this._id = (isWhite ? 'R' : 'r') + idNum.toString();
     this.getPossibleMoves = this.getPossibleMoves;
   }
 
-  getPossibleMoves(board) {
-    let possibleMoves = [];
+  getPossibleMoves(board: Board) {
+    let possibleMoves: Position[] = [];
     const { x, y } = this.position;
 
     // ? eastward moves
@@ -18,7 +19,7 @@ class Rook extends Piece {
     // of board, don't look for moves in this direction
     if (x !== 7) {
       for (let i = x + 1; i < 8; i++) {
-        const pos = { x: i, y };
+        const pos: Position = { x: i, y };
         const { piece } = board[y][i];
 
         if (piece !== null) {
@@ -40,7 +41,7 @@ class Rook extends Piece {
     // of board, don't look for moves in this direction
     if (x !== 0) {
       for (let i = x - 1; i >= 0; i--) {
-        const pos = { x: i, y };
+        const pos: Position = { x: i, y };
         const { piece } = board[y][i];
 
         if (piece !== null) {
@@ -62,7 +63,7 @@ class Rook extends Piece {
     // of board, don't look for moves in this direction
     if (y !== 7) {
       for (let i = y + 1; i < 8; i++) {
-        const pos = { x, y: i };
+        const pos: Position = { x, y: i };
         const { piece } = board[i][x];
 
         if (piece !== null) {
@@ -84,7 +85,7 @@ class Rook extends Piece {
     // of board, don't look for moves in this direction
     if (y !== 0) {
       for (let i = y - 1; i >= 0; i--) {
-        const pos = { x, y: i };
+        const pos: Position = { x, y: i };
         const { piece } = board[i][x];
 
         if (piece !== null) {

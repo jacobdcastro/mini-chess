@@ -1,14 +1,15 @@
-// @ts-nocheck
 import Pawn from './pieces/pawn';
 import Bishop from './pieces/bishop';
 import Knight from './pieces/knight';
 import Rook from './pieces/rook';
 import King from './pieces/king';
 import Queen from './pieces/queen';
+import { AllPieces, AnyPiece } from '../helpers/interfaces';
+import Move from './move';
 
 class Pieces {
-  active: any;
-  captured: any;
+  public active: AllPieces;
+  public captured: AllPieces;
 
   constructor() {
     this.active = {
@@ -41,16 +42,15 @@ class Pieces {
     };
   }
 
-  initializeMove(move) {
+  initializeMove(move: Move) {
     const {
       movedPieceIsWhite,
       movedPieceId,
-      startingLocation,
       endingLocation,
       capturedPieceId,
     } = move;
-    let selectedPiece;
-    let capturedPiece;
+    let selectedPiece: AnyPiece | undefined;
+    let capturedPiece: AnyPiece | undefined;
 
     if (movedPieceIsWhite) {
       selectedPiece = this.active.white.find(p => p._id === movedPieceId);
@@ -58,18 +58,18 @@ class Pieces {
       selectedPiece = this.active.black.find(p => p._id === movedPieceId);
     }
 
-    selectedPiece.move(endingLocation);
+    if (selectedPiece) selectedPiece.move(endingLocation);
 
     if (capturedPieceId !== null) {
       if (movedPieceIsWhite) {
         capturedPiece = this.active.black.find(p => p._id === capturedPieceId);
-        this.captured.black.push(capturedPiece);
+        if (capturedPiece) this.captured.black.push(capturedPiece);
         this.active.black = this.active.black.filter(
           p => p._id !== capturedPieceId
         );
       } else {
         capturedPiece = this.active.white.find(p => p._id === capturedPieceId);
-        this.captured.white.push(capturedPiece);
+        if (capturedPiece) this.captured.white.push(capturedPiece);
         this.active.white = this.active.white.filter(
           p => p._id !== capturedPieceId
         );
@@ -77,7 +77,7 @@ class Pieces {
     }
   }
 
-  addInitialPawns() {
+  private addInitialPawns() {
     // white pawns
     for (let i = 0; i < 8; i++) {
       this.active.white.push(new Pawn(true, { x: i, y: 1 }, i + 1));

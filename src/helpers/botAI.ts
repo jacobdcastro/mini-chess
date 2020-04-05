@@ -1,12 +1,22 @@
-// @ts-nocheck
-import { Position } from '../@types/Position';
+import { Position, Board, AnyPiece } from './interfaces';
+import Pieces from '../models/pieces';
+import Player from '../models/player';
 
 interface MovablePiece {
-  readonly piece: object;
+  readonly piece: AnyPiece;
   readonly possibleMoves: Position[];
 }
 
-const examineAllPossibleMoves = (board, pieces, player): MovablePiece[] => {
+interface SelectedPiece {
+  readonly selectedPiece: AnyPiece;
+  readonly newCoords: Position;
+}
+
+const examineAllPossibleMoves = (
+  board: Board,
+  pieces: Pieces,
+  player: Player
+): MovablePiece[] => {
   let allMovablePieces: MovablePiece[] = [];
   const allColorPieces =
     player.color === 'w' ? pieces.active.white : pieces.active.black;
@@ -21,7 +31,7 @@ const examineAllPossibleMoves = (board, pieces, player): MovablePiece[] => {
   return allMovablePieces;
 };
 
-const chooseRandomMove = (allMovablePieces: MovablePiece[]) => {
+const chooseRandomMove = (allMovablePieces: MovablePiece[]): SelectedPiece => {
   const ran = Math.floor(Math.random() * allMovablePieces.length);
   const selectedPiece = allMovablePieces[ran];
   const ran2 = Math.floor(Math.random() * selectedPiece.possibleMoves.length);
@@ -29,7 +39,12 @@ const chooseRandomMove = (allMovablePieces: MovablePiece[]) => {
   return { selectedPiece: selectedPiece.piece, newCoords: selectedMove };
 };
 
-const botMovePiece = (b, pc, pl, movePiece) => {
+const botMovePiece = (
+  b: Board,
+  pc: Pieces,
+  pl: Player,
+  movePiece: (selectedPiece: AnyPiece, newCoords: Position) => {}
+) => {
   const allMovablePieces = examineAllPossibleMoves(b, pc, pl);
   const { selectedPiece, newCoords } = chooseRandomMove(allMovablePieces);
 
