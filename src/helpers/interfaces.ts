@@ -45,3 +45,12 @@ export interface AllPieces {
 }
 
 export interface HistoryItem {}
+
+export interface InputKey {
+  upArrow: boolean;
+  downArrow: boolean;
+  leftArrow: boolean;
+  rightArrow: boolean;
+  return: boolean;
+  meta: boolean;
+}

@@ -1,11 +1,17 @@
-// @ts-nocheck
 import * as React from 'react';
 import { Text } from 'ink';
-
+import SpaceType from '../models/space';
 import Space from './Space';
+import { Position } from '../helpers/interfaces';
 
-const Row = ({ rowIndex, spaces, selectedPossibleMoves }) => {
-  const setColor = i => {
+interface RowProps {
+  rowIndex: number;
+  spaces: SpaceType[];
+  selectedPossibleMoves: Position[];
+}
+
+const Row = ({ rowIndex, spaces, selectedPossibleMoves }: RowProps) => {
+  const setColor = (i: number) => {
     if (rowIndex === 0 || rowIndex % 2 === 0) {
       if (i % 2) return 'gray';
       else return 'black';
@@ -17,7 +23,7 @@ const Row = ({ rowIndex, spaces, selectedPossibleMoves }) => {
 
   return (
     <Text>
-      {spaces.map((space, i) => {
+      {spaces.map((space: SpaceType, i: number) => {
         return (
           <Space
             key={space._id}

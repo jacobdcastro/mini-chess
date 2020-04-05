@@ -15,6 +15,7 @@ class Game {
   public ended: Date | undefined;
   public winner: Player | undefined;
   public board: Board;
+  public setGame?: () => {}; // set in App.tsx
 
   constructor() {
     this.pieces = new Pieces();
@@ -30,7 +31,7 @@ class Game {
     this.board = this.createInitBoard();
   }
 
-  createInitBoard() {
+  private createInitBoard() {
     let newBoard: Board = [[], [], [], [], [], [], [], []];
     const { white, black } = this.pieces.active;
     const allPieces = white.concat(black);
@@ -52,7 +53,7 @@ class Game {
     return newBoard;
   }
 
-  updateGame(move: Move) {
+  public updateGame(move: Move) {
     if (move) this.pieces.initializeMove(move);
     const { white, black } = this.pieces.active;
     const allPieces = white.concat(black);
@@ -83,7 +84,7 @@ class Game {
 
   // TODO finish fen generation
   // https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
-  updateHistory(move: Move) {
+  public updateHistory(move: Move) {
     let fen: string = '';
     const timestamp: Date = new Date();
 
@@ -100,7 +101,7 @@ class Game {
   }
 
   // TODO add player function for online play
-  // addPlayer(name: string, color: Color) {
+  // public addPlayer(name: string, color: Color) {
   //   if (this.players.length === 2) return;
   //   else if (this.players.length === 1) {
   //     if (this.players[0].color === 'w') {

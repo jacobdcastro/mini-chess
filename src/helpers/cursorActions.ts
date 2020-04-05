@@ -1,13 +1,6 @@
 import Player from '../models/player';
-import { Board, Position, AnyPiece } from './interfaces';
+import { Board, Position, AnyPiece, InputKey } from './interfaces';
 import Pieces from '../models/pieces';
-
-interface InputKey {
-  upArrow: boolean;
-  downArrow: boolean;
-  leftArrow: boolean;
-  rightArrow: boolean;
-}
 
 export const moveCursor = (input: string, key: InputKey, player: Player) => {
   const { x, y } = player.cursorPosition;

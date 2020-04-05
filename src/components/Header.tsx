@@ -1,12 +1,14 @@
-// @ts-nocheck
 import * as React from 'react';
 import { Box, Text, Color, useInput } from 'ink';
 import Outline from 'ink-box';
+import { InputKey } from '../helpers/interfaces';
 
 const Header = () => {
-  const [showInstructions, toggleShowInstructions] = React.useState(true);
+  const [showInstructions, toggleShowInstructions] = React.useState<boolean>(
+    true
+  );
 
-  useInput((input, key) => {
+  useInput((input, key: InputKey) => {
     if (key.return && key.meta) toggleShowInstructions(false);
   });
 

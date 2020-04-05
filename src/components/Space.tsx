@@ -2,12 +2,27 @@
 import * as React from 'react';
 import { Color } from 'ink';
 import { GameContext, PlayerContext } from './App';
+import { Position, AnyPiece } from '../helpers/interfaces';
+import Piece from '../models/piece';
+import Pieces from '../models/pieces';
+import SpaceType from '../models/space';
 
-const Space = ({ space, defaultSpaceColor, selectedPossibleMoves }) => {
+interface SpaceProps {
+  space: SpaceType;
+  defaultSpaceColor: 'gray' | 'black';
+  selectedPossibleMoves: Position[];
+}
+
+const Space = ({
+  space,
+  defaultSpaceColor,
+  selectedPossibleMoves,
+}: SpaceProps) => {
   const [piece, setPiece] = React.useState(null);
-  const { pieces } = React.useContext(GameContext);
-  const { player } = React.useContext(PlayerContext);
-  const allPieces = pieces.active.black.concat(pieces.active.white);
+  // TODO fix any types
+  const { pieces } = React.useContext<any>(GameContext);
+  const { player } = React.useContext<any>(PlayerContext);
+  const allPieces: Piece[] = pieces.active.black.concat(pieces.active.white);
 
   // check if space if a possible move for selected piece
   const isPossibleMove = selectedPossibleMoves.find(

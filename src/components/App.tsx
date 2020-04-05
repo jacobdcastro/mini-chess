@@ -1,16 +1,22 @@
-// @ts-nocheck
 'use strict';
 import * as React from 'react';
-import useChessGame from '../helpers/useChessGame';
+import useChessGame, { GameHook } from '../helpers/useChessGame';
 import Header from './Header';
 import GameView from './GameView';
+// import Game from '../models/game';
+
+// type MappedGameContextTypes<T> = {
+//   [P in keyof T]: T[P];
+// } & { setGame: () => {} };
+
+// type GameContextTypes = MappedGameContextTypes<Game> | null;
 
 // create global state context
 export const GameContext = React.createContext({});
 export const PlayerContext = React.createContext({});
 
 const App = () => {
-  const { game, setGame } = useChessGame();
+  const { game, setGame }: GameHook = useChessGame();
 
   const { player1, player2 } = game;
   const [player, setPlayer] = React.useState(player1);
