@@ -1,5 +1,12 @@
-const examineAllPossibleMoves = (board, pieces, player) => {
-  let allMovablePieces: object[] = [];
+import { Position } from '../@types/Position';
+
+interface MovablePiece {
+  readonly piece: object;
+  readonly possibleMoves: Position[];
+}
+
+const examineAllPossibleMoves = (board, pieces, player): MovablePiece[] => {
+  let allMovablePieces: MovablePiece[] = [];
   const allColorPieces =
     player.color === 'w' ? pieces.active.white : pieces.active.black;
 
@@ -13,7 +20,7 @@ const examineAllPossibleMoves = (board, pieces, player) => {
   return allMovablePieces;
 };
 
-const chooseRandomMove = allMovablePieces => {
+const chooseRandomMove = (allMovablePieces: MovablePiece[]) => {
   const ran = Math.floor(Math.random() * allMovablePieces.length);
   const selectedPiece = allMovablePieces[ran];
   const ran2 = Math.floor(Math.random() * selectedPiece.possibleMoves.length);
@@ -28,4 +35,4 @@ const botMovePiece = (b, pc, pl, movePiece) => {
   movePiece(selectedPiece, newCoords);
 };
 
-module.exports = botMovePiece;
+export default botMovePiece;

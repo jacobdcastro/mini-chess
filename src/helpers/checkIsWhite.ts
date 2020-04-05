@@ -7,4 +7,4 @@ const checkIsWhite = (_id: string) => {
   }
 };
 
-module.exports = checkIsWhite;
+export default checkIsWhite;

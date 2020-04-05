@@ -1,16 +1,18 @@
 {
   "include": ["src/**/*"],
-  "exclude": ["src/@types", "src/__tests__"],
+  "exclude": ["node_modules", "src/@types", "src/__tests__"],
+  "compileOnSave": true,
   "compilerOptions": {
     "noImplicitAny": false,
     "target": "ES6",
-    "strict": true,
-    "jsx": "preserve",
+    "strict": false,
+    "jsx": "react",
     "sourceMap": true,
-    "allowJs": true,
-    "allowSyntheticDefaultImports": false,
+    "allowJs": false,
+    "module": "CommonJS",
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "alwaysStrict": true,
+    "alwaysStrict": false,
     "moduleResolution": "Node"
   }
 }
