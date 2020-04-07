@@ -5,7 +5,6 @@ import Move from '../models/move';
 import { GameContext, PlayerContext } from './App';
 import {
   moveCursor,
-  cursorDidMove,
   highlightPossibleMoves,
   moveCursorOnPossibleMoves,
 } from '../helpers/cursorActions';
