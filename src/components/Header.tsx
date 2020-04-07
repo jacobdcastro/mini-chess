@@ -23,7 +23,10 @@ const Header = () => {
       {showInstructions ? (
         <Box flexDirection="column" alignItems="center" marginBottom={2}>
           <Text underline>INSTRUCTIONS</Text>
-          <Text>Move cursor: Arrow Keys OR "wasd"</Text>
+          <Text>
+            Move cursor (<Color bgKeyword="blue">{`  `}</Color>): Arrow Keys OR
+            "wasd"
+          </Text>
           <Text>Select piece to move: Enter</Text>
           <Text>Confirm space to move piece to: Enter</Text>
           {/* <Text>Unselect piece to move: Shift + Enter</Text> */}
