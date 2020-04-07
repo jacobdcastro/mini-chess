@@ -1,4 +1,4 @@
-# cli-chess
+# mini-chess
 
 An object-oriented chess game played in the terminal. Still a a work in progress, but will be testing soon!
 

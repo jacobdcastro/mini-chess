@@ -17,7 +17,7 @@ const Header = () => {
     <>
       <Outline borderStyle="round" borderColor="red" float="center" padding={1}>
         <Text>
-          Welcome to <Color green>cli-chess</Color>!
+          Welcome to <Color green>mini-chess</Color>!
         </Text>
       </Outline>
       {showInstructions ? (
