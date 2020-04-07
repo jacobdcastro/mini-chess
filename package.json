@@ -2,6 +2,11 @@
   "name": "cli-chess",
   "version": "0.1.0-alpa.0",
   "license": "MIT",
+  "author": {
+    "name": "Jacob D. Castro",
+    "email": "jdcastro.business@gmail.com",
+    "url": "https://jacobdcastro.com/"
+  },
   "scripts": {
     "start": "gulp transpileTs && node public/cli.js",
     "dev": "gulp transpileTs && prettier --write \"public/\" && node public/cli.js",
@@ -18,8 +23,8 @@
     "chess": "./cli.js"
   },
   "keywords": [
-    "chess",
     "cli",
+    "chess",
     "game"
   ],
   "engines": {
