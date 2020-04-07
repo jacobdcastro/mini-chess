@@ -1,3 +1,4 @@
+// @ts-nocheck
 import * as React from 'react';
 import { Box, Color, useInput } from 'ink';
 import Move from '../models/move';
