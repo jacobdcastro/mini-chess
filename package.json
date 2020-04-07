@@ -15,12 +15,12 @@
     "prepare": "npm run build",
     "format": "prettier --write \"**/*.{ts,tsx,js}\" \"!node_modules/**\" \"!build/**\""
   },
-  "main": "build",
+  "main": "build/cli.js",
   "files": [
     "build"
   ],
   "bin": {
-    "chess": "./cli.js"
+    "chess": "./build/cli.js"
   },
   "keywords": [
     "cli",
