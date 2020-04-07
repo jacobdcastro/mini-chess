@@ -1,25 +1,31 @@
 {
   "name": "cli-chess",
-  "version": "0.0.0",
+  "version": "0.1.0-alpa.0",
   "license": "MIT",
-  "bin": {
-    "chess": "cli.js"
+  "scripts": {
+    "start": "gulp transpileTs && node public/cli.js",
+    "dev": "gulp transpileTs && prettier --write \"public/\" && node public/cli.js",
+    "build": "gulp",
+    "clean": "gulp clean",
+    "prepare": "npm run build",
+    "format": "prettier --write \"**/*.{ts,tsx,js}\" \"!node_modules/**\" \"!build/**\""
   },
+  "main": "build",
+  "files": [
+    "build"
+  ],
+  "bin": {
+    "chess": "./cli.js"
+  },
+  "keywords": [
+    "chess",
+    "cli",
+    "game"
+  ],
   "engines": {
     "node": ">=8"
   },
-  "scripts": {
-    "start": "gulp transpileTs && node public/cli.js",
-    "build": "gulp && node build/cli.js",
-    "lint": "eslint src/**/**/*.js",
-    "format": "prettier --write \"**/*.{ts,tsx,js,json,md}\" \"!node_modules/**\" \"!dist/**\"",
-    "test": "xo && ava"
-  },
-  "files": [
-    "cli.js"
-  ],
   "dependencies": {
-    "import-jsx": "^3.1.0",
     "ink": "^2.7.1",
     "ink-box": "^1.0.0",
     "ink-select-input": "^3.1.2",
@@ -51,13 +57,5 @@
     "ts-node": "^8.8.1",
     "typescript": "^3.8.3",
     "xo": "^0.28.0"
-  },
-  "ava": {
-    "require": [
-      "@babel/register"
-    ]
-  },
-  "xo": {
-    "extends": "xo-react"
   }
 }
