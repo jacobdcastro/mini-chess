@@ -12,15 +12,15 @@ This game uses [Ink](https://github.com/vadimdemedes/ink) to generate the cli vi
 
 ## Test out the game!
 
-This is absolutely not ready to play yet. But you can totally move pieces around the board so that's cool.
+It's now ready to play! Kind of. The Bot AI is pretty bad at chess, choosing moves entirely at random. My next step is to add a bit of intelligence to the artificial player. :)
 
-If you want a little preview of how this will work, clone it and get it up and running!
+Though not on NPM quite yet, you can clone this project and get it up and running locally!
 
 ```bash
 git clone https://github.com/jacobdcastro/cli-chess.git
 cd cli-chess
 npm install
-node src/cli.js
+npm start
 ```
 
 You should see a little chess board, pieces, and move the cursor around! You can use `ctrl + c` to exit the app.
