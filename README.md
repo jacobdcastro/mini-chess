@@ -16,15 +16,24 @@ It's now ready to play! Kind of. The Bot AI is pretty bad at chess, choosing mov
 
 Though not on NPM quite yet, you can clone this project and get it up and running locally!
 
+
+To temporarily install the game and uninstall when you're done, run this:
 ```bash
-git clone https://github.com/jacobdcastro/cli-chess.git
-cd cli-chess
-npm install
-npm start
+npx mini-chess
+```
+
+To install globally and have access to the cli at any time, run this:
+```bash
+npm install -g mini-chess
+chess
 ```
 
 You should see a little chess board, pieces, and move the cursor around! You can use `ctrl + c` to exit the app.
 
 ## CLI
 
-More soon to come!
+After installing globally, you have access to the mini-chess cli at any time. Simply run `chess` as shown below to start a new game of chess.
+
+```bash
+$ chess
+```
