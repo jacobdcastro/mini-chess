@@ -1,5 +1,5 @@
 import { Position, Board, AnyPiece } from './interfaces';
-import Pieces from '../models/pieces';
+import Pieces from '../models/allPieces';
 import Player from '../models/player';
 
 interface MovablePiece {

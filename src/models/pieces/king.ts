@@ -10,10 +10,15 @@ class King extends Piece {
     super(isWhite, position, '♚ ', '♔ ', 1000000000000);
     this._id = isWhite ? 'K' : 'k';
     this.inCheck = false;
+    this.setCheck = this.setCheck;
     this.getPossibleMoves = this.getPossibleMoves;
   }
 
-  getPossibleMoves(board: Board) {
+  public setCheck(inCheck: boolean) {
+    this.inCheck = inCheck;
+  }
+
+  public getPossibleMoves(board: Board) {
     let possibleMoves: Position[] = [];
     const { x, y } = this.position;
 
@@ -35,7 +40,7 @@ class King extends Piece {
 
       const { piece } = board[move.y][move.x];
       if (piece !== null) {
-        // if space is occupied by enemy, add space
+        // if space is occupied by enemy, add space as possible move
         if (checkIsWhite(piece._id) !== this.isWhite) {
           possibleMoves.push(move);
         }

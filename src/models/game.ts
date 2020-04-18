@@ -1,8 +1,9 @@
-import Pieces from './pieces';
+import Pieces from './allPieces';
 import Space from './space';
 import Player from './player';
 import { getBoardSnapshot, checkCastling } from '../helpers/fen';
 import { HistoryItem, Board } from '../helpers/interfaces';
+import { kingIsInCheck } from '../helpers/virtualBoard';
 import Move from './move';
 
 class Game {
@@ -54,7 +55,7 @@ class Game {
   }
 
   public updateGame(move: Move) {
-    if (move) this.pieces.initializeMove(move);
+    this.pieces.initializeMove(move);
     const { white, black } = this.pieces.active;
     const allPieces = white.concat(black);
 
@@ -75,11 +76,17 @@ class Game {
 
     this.board = updatedBoard;
 
-    if (move) {
-      this.isWhiteTurn = !this.isWhiteTurn;
-      // this.updateHistory(move);
-      return this;
+    // check if opposing king is now in check
+    if (kingIsInCheck(!move.movedPieceIsWhite, updatedBoard, this.pieces)) {
+      const pieces = move.movedPieceIsWhite ? black : white;
+      const king = pieces.find(p => p._id.toLowerCase() === 'k');
+      // @ts-ignore
+      king.setCheck(true);
     }
+
+    this.isWhiteTurn = !this.isWhiteTurn;
+    // this.updateHistory(move);
+    return this;
   }
 
   // TODO finish fen generation

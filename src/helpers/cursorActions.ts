@@ -1,6 +1,7 @@
 import Player from '../models/player';
 import { Board, Position, AnyPiece, InputKey } from './interfaces';
-import Pieces from '../models/pieces';
+import Pieces from '../models/allPieces';
+import { King } from '../models/pieces';
 
 export const moveCursor = (input: string, key: InputKey, player: Player) => {
   const { x, y } = player.cursorPosition;
@@ -58,8 +59,14 @@ export const highlightPossibleMoves = (
   );
 
   if (selectedPiece) {
+    const kingsidePieces = player.color === 'w' ? white : black;
+    const king: King = kingsidePieces.find(p => p._id.toLowerCase() === 'k');
+
     // calculate possible moves for selected piece
-    const possibleMoves: Position[] = selectedPiece.getPossibleMoves(board);
+    const possibleMoves: Position[] = selectedPiece.getPossibleMoves(
+      board,
+      king
+    );
 
     if (possibleMoves.length > 0) {
       // set state with array of possible moves

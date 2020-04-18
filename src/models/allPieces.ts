@@ -1,9 +1,4 @@
-import Pawn from './pieces/pawn';
-import Bishop from './pieces/bishop';
-import Knight from './pieces/knight';
-import Rook from './pieces/rook';
-import King from './pieces/king';
-import Queen from './pieces/queen';
+import { Pawn, Bishop, Knight, Rook, King, Queen } from './pieces';
 import { AllPieces, AnyPiece } from '../helpers/interfaces';
 import Move from './move';
 

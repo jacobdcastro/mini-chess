@@ -1,6 +1,7 @@
 import Piece from '../piece';
 import checkIsWhite from '../../helpers/checkIsWhite';
 import { Position, Board } from '../../helpers/interfaces';
+import King from './king';
 
 class Rook extends Piece {
   public _id: string;
@@ -10,7 +11,8 @@ class Rook extends Piece {
     this.getPossibleMoves = this.getPossibleMoves;
   }
 
-  getPossibleMoves(board: Board) {
+  // TODO finish doing king check for each move
+  getPossibleMoves(board: Board, king: King) {
     let possibleMoves: Position[] = [];
     const { x, y } = this.position;
 

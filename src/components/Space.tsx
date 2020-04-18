@@ -4,7 +4,7 @@ import { Color } from 'ink';
 import { GameContext, PlayerContext } from './App';
 import { Position, AnyPiece } from '../helpers/interfaces';
 import Piece from '../models/piece';
-import Pieces from '../models/pieces';
+import Pieces from '../models/allPieces';
 import SpaceType from '../models/space';
 
 interface SpaceProps {
