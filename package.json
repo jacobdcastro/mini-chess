@@ -62,5 +62,13 @@
     "ts-node": "^8.8.1",
     "typescript": "^3.8.3",
     "xo": "^0.28.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jacobdcastro/mini-chess"
+  },
+  "bugs": {
+    "email": "jdcastro.business@gmail.com",
+    "url": "https://github.com/jacobdcastro/issues"
   }
 }

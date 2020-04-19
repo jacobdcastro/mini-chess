@@ -59,7 +59,7 @@ export const highlightPossibleMoves = (
   );
 
   if (selectedPiece) {
-    const kingsidePieces = player.color === 'w' ? white : black;
+    const kingsidePieces: AnyPiece[] = player.color === 'w' ? white : black;
     const king: King = kingsidePieces.find(p => p._id.toLowerCase() === 'k');
 
     // calculate possible moves for selected piece
