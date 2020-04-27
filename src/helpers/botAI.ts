@@ -22,6 +22,7 @@ const examineAllPossibleMoves = (
     player.color === 'w' ? pieces.active.white : pieces.active.black;
 
   allColorPieces.forEach(p => {
+    // @ts-ignore
     const possibleMoves = p.getPossibleMoves(board);
     if (possibleMoves.length > 0) {
       allMovablePieces.push({ piece: p, possibleMoves });

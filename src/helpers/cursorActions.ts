@@ -60,13 +60,10 @@ export const highlightPossibleMoves = (
 
   if (selectedPiece) {
     const kingsidePieces: AnyPiece[] = player.color === 'w' ? white : black;
-    const king: King = kingsidePieces.find(p => p._id.toLowerCase() === 'k');
+    const king: any = kingsidePieces.find(p => p._id.toLowerCase() === 'k');
 
     // calculate possible moves for selected piece
-    const possibleMoves: Position[] = selectedPiece.getPossibleMoves(
-      board,
-      king
-    );
+    const possibleMoves: Position[] = selectedPiece.getPossibleMoves(board);
 
     if (possibleMoves.length > 0) {
       // set state with array of possible moves
@@ -81,7 +78,6 @@ export const highlightPossibleMoves = (
 export const moveCursorOnPossibleMoves = (
   selectedPossibleMoves: Position[],
   player: Player,
-  setPlayer: (object: object) => {},
   key: InputKey
 ) => {
   let curPos: Position = player.cursorPosition;
@@ -233,10 +229,5 @@ export const moveCursorOnPossibleMoves = (
     }
   }
 
-  if (newPos) {
-    setPlayer({
-      ...player,
-      cursorPosition: newPos,
-    });
-  }
+  return newPos ? newPos : curPos;
 };
