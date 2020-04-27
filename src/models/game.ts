@@ -4,6 +4,7 @@ import Player from './player';
 import { getBoardSnapshot, checkCastling } from '../helpers/fen';
 import { HistoryItem, Board } from '../helpers/interfaces';
 import { kingIsInCheck } from '../helpers/virtualBoard';
+import getKing from '../helpers/getKing';
 import Move from './move';
 
 class Game {
@@ -18,8 +19,8 @@ class Game {
   public board: Board;
   public setGame?: () => {}; // set in App.tsx
 
-  constructor() {
-    this.pieces = new Pieces();
+  constructor(pieces?: Pieces) {
+    this.pieces = pieces ? pieces : new Pieces();
     this.isWhiteTurn = true;
     this.player1 = new Player('Player 1', 'w');
     this.player2 = new Player('Player 2', 'b');
@@ -29,12 +30,12 @@ class Game {
     this.ended = undefined;
     this.winner = undefined;
     this.updateGame = this.updateGame;
-    this.board = this.createInitBoard();
+    this.board = this.createInitBoard(this.pieces);
   }
 
-  private createInitBoard() {
+  private createInitBoard(pieces: Pieces) {
     let newBoard: Board = [[], [], [], [], [], [], [], []];
-    const { white, black } = this.pieces.active;
+    const { white, black } = pieces.active;
     const allPieces = white.concat(black);
 
     for (let y = 0; y < 8; y++) {
@@ -82,6 +83,12 @@ class Game {
       const king = pieces.find(p => p._id.toLowerCase() === 'k');
       // @ts-ignore
       king.setCheck(true);
+    }
+    if (!kingIsInCheck(!move.movedPieceIsWhite, updatedBoard, this.pieces)) {
+      const pieces = move.movedPieceIsWhite ? black : white;
+      const king = pieces.find(p => p._id.toLowerCase() === 'k');
+      // @ts-ignore
+      king.setCheck(false);
     }
 
     this.isWhiteTurn = !this.isWhiteTurn;

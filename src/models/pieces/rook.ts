@@ -1,7 +1,6 @@
 import Piece from '../piece';
 import checkIsWhite from '../../helpers/checkIsWhite';
-import { Position, Board } from '../../helpers/interfaces';
-import King from './king';
+import { Position, Board, AnyPiece } from '../../helpers/interfaces';
 
 class Rook extends Piece {
   public _id: string;
@@ -12,7 +11,7 @@ class Rook extends Piece {
   }
 
   // TODO finish doing king check for each move
-  getPossibleMoves(board: Board, king: King) {
+  getPossibleMoves(board: Board) {
     let possibleMoves: Position[] = [];
     const { x, y } = this.position;
 
