@@ -19,6 +19,7 @@ const Stats = () => {
 
   React.useEffect(() => {
     if (bKing.inCheck || wKing.inCheck) setInCheck(true);
+    else setInCheck(false);
   }, [bKing.inCheck, wKing.inCheck]);
 
   return (

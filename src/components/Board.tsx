@@ -11,9 +11,10 @@ import {
 import botMovePiece from '../helpers/botAI';
 
 import Row from './Row';
+import { AnyPiece } from '../helpers/interfaces';
 
 const Board = () => {
-  const game: any = React.useContext(GameContext);
+  const game = React.useContext(GameContext);
   const { player, setPlayer, player2 } = React.useContext(PlayerContext);
   const { board, pieces, setGame, isWhiteTurn } = game;
   const [selectedPossibleMoves, setSelectedPossibleMoves] = React.useState([]);
@@ -27,7 +28,7 @@ const Board = () => {
     setSelectedPossibleMoves([]); //reset selected state
   };
 
-  const movePiece = (piece, newCoords) => {
+  const movePiece = (piece: AnyPiece, newCoords) => {
     const move = new Move(board, piece, newCoords);
     const newGameData = game.updateGame(move);
     updateStateAfterMove(newGameData);
@@ -52,7 +53,14 @@ const Board = () => {
         cursorPosition: moveCursor(input, key, player),
       });
     } else {
-      moveCursorOnPossibleMoves(selectedPossibleMoves, player, setPlayer, key);
+      setPlayer({
+        ...player,
+        cursorPosition: moveCursorOnPossibleMoves(
+          selectedPossibleMoves,
+          player,
+          key
+        ),
+      });
     }
 
     // reset possible moves array if cursor is moved after piece selection
