@@ -5,7 +5,7 @@ import { PlayerContext, GameContext } from './App';
 import getSpaceId from '../helpers/getSpaceId';
 import { kingIsInCheck } from '../helpers/virtualBoard';
 
-// box props
+// box style props
 const fdr = { flexDirection: 'row', width: 70 };
 const fdc = { flexDirection: 'column', width: 16 };
 
@@ -75,8 +75,6 @@ const Stats = () => {
           </Text>
         </Box>
       </Box>
-
-      <Text></Text>
     </Box>
   );
 };

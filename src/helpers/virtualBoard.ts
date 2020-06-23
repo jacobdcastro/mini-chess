@@ -2,6 +2,10 @@ import { Board, AnyPiece, Position } from './interfaces';
 import Space from '../models/space';
 import Pieces from '../models/allPieces';
 
+export const createVirtualPieces = (currentBoard: Board) => {
+  const virtualPieces: Pieces = new Pieces();
+};
+
 export const createVirtualBoard = (allPieces: AnyPiece[]) => {
   let virtualBoard: Board = [[], [], [], [], [], [], [], []];
   for (let y = 0; y < 8; y++) {
@@ -32,11 +36,12 @@ export const kingIsInCheck = (
   if (kingIsWhite) {
     let allPossibleBlackMoves: Position[] = [];
 
-    bPieces.forEach(p => {
+    bPieces.forEach((p: AnyPiece) => {
       const moves = p.getPossibleMoves(currentBoard);
       allPossibleBlackMoves.push(...moves);
     });
 
+    // returns true if king's current position is a possible move of black piece
     const wKingIsInCheck = allPossibleBlackMoves.some(
       pos => pos.x === wKing.position.x && pos.y === wKing.position.y
     );
@@ -45,11 +50,12 @@ export const kingIsInCheck = (
   } else {
     let allPossibleWhiteMoves: Position[] = [];
 
-    wPieces.forEach(p => {
+    wPieces.forEach((p: AnyPiece) => {
       const moves = p.getPossibleMoves(currentBoard);
       allPossibleWhiteMoves.push(...moves);
     });
 
+    // returns true if king's current position is a possible move of white piece
     const bKingIsInCheck: boolean = allPossibleWhiteMoves.some(
       pos => pos.x === bKing.position.x && pos.y === bKing.position.y
     );
@@ -58,14 +64,21 @@ export const kingIsInCheck = (
   }
 };
 
+// run in return statement of each piece's getPossibleMove method
 export const filterInvalidMoves = (
   pieceId: string,
   moves: Position[],
   board: Board
 ) => {
   const validMoves = moves.filter(move => {
-    // board.forEach(row => row.forEach(space => ))
+    board.forEach(row =>
+      row.forEach(space => {
+        'hi';
+      })
+    );
   });
+
+  return moves;
 };
 
 export const nextMoveIsCheckmate = (currentBoard: Board) => {};

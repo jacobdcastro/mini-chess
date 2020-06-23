@@ -1,6 +1,7 @@
 import Piece from '../piece';
 import checkIsWhite from '../../helpers/checkIsWhite';
-import { Position, Board, AnyPiece } from '../../helpers/interfaces';
+import { Position, Board } from '../../helpers/interfaces';
+import { filterInvalidMoves } from '../../helpers/virtualBoard';
 
 class Rook extends Piece {
   public _id: string;
@@ -103,7 +104,7 @@ class Rook extends Piece {
       }
     }
 
-    return possibleMoves;
+    return filterInvalidMoves(this._id, possibleMoves, board);
   }
 }
 

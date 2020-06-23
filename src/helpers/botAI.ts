@@ -24,8 +24,10 @@ const examineAllPossibleMoves = (
   allColorPieces.forEach(p => {
     // @ts-ignore
     const possibleMoves = p.getPossibleMoves(board);
-    if (possibleMoves.length > 0) {
-      allMovablePieces.push({ piece: p, possibleMoves });
+    if (possibleMoves) {
+      if (possibleMoves.length > 0) {
+        allMovablePieces.push({ piece: p, possibleMoves });
+      }
     }
   });
 

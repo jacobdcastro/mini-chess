@@ -63,14 +63,18 @@ export const highlightPossibleMoves = (
     const king: any = kingsidePieces.find(p => p._id.toLowerCase() === 'k');
 
     // calculate possible moves for selected piece
-    const possibleMoves: Position[] = selectedPiece.getPossibleMoves(board);
+    const possibleMoves: void | Position[] = selectedPiece.getPossibleMoves(
+      board
+    );
 
-    if (possibleMoves.length > 0) {
-      // set state with array of possible moves
-      setSelectedPossibleMoves(possibleMoves);
+    if (possibleMoves) {
+      if (possibleMoves.length > 0) {
+        // set state with array of possible moves
+        setSelectedPossibleMoves(possibleMoves);
 
-      // set state to move cursor to possible move space
-      setPlayer({ ...player, cursorPosition: possibleMoves[0] });
+        // set state to move cursor to possible move space
+        setPlayer({ ...player, cursorPosition: possibleMoves[0] });
+      }
     }
   }
 };

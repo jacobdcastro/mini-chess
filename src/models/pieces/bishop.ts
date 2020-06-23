@@ -1,6 +1,7 @@
 import Piece from '../piece';
 import { Position, Board } from '../../helpers/interfaces';
 import checkIsWhite from '../../helpers/checkIsWhite';
+import { filterInvalidMoves } from '../../helpers/virtualBoard';
 
 class Bishop extends Piece {
   _id: string;
@@ -91,7 +92,7 @@ class Bishop extends Piece {
       }
     }
 
-    return possibleMoves;
+    return filterInvalidMoves(this._id, possibleMoves, board);
   }
 }
 

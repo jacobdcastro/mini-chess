@@ -1,34 +1,38 @@
 import { Pawn, Bishop, Knight, Rook, King, Queen } from './pieces';
-import { AllPieces, AnyPiece } from '../helpers/interfaces';
+import { AllPieces, AnyPiece, Board } from '../helpers/interfaces';
 import Move from './move';
+import { createVirtualBoard } from '../helpers/virtualBoard';
+
+const defaultBoard = {
+  white: [
+    new Rook(true, { x: 0, y: 0 }, 1),
+    new Knight(true, { x: 1, y: 0 }, 1),
+    new Bishop(true, { x: 2, y: 0 }, 1),
+    new Queen(true, { x: 3, y: 0 }, 1),
+    new King(true, { x: 4, y: 0 }),
+    new Bishop(true, { x: 5, y: 0 }, 2),
+    new Knight(true, { x: 6, y: 0 }, 2),
+    new Rook(true, { x: 7, y: 0 }, 2),
+  ],
+  black: [
+    new Rook(false, { x: 0, y: 7 }, 1),
+    new Knight(false, { x: 1, y: 7 }, 1),
+    new Bishop(false, { x: 2, y: 7 }, 1),
+    new Queen(false, { x: 3, y: 7 }, 1),
+    new King(false, { x: 4, y: 7 }),
+    new Bishop(false, { x: 5, y: 7 }, 2),
+    new Knight(false, { x: 6, y: 7 }, 2),
+    new Rook(false, { x: 7, y: 7 }, 2),
+  ],
+};
 
 class Pieces {
   public active: AllPieces;
   public captured: AllPieces;
 
-  constructor() {
-    this.active = {
-      white: [
-        new Rook(true, { x: 0, y: 0 }, 1),
-        new Knight(true, { x: 1, y: 0 }, 1),
-        new Bishop(true, { x: 2, y: 0 }, 1),
-        new Queen(true, { x: 3, y: 0 }, 1),
-        new King(true, { x: 4, y: 0 }),
-        new Bishop(true, { x: 5, y: 0 }, 2),
-        new Knight(true, { x: 6, y: 0 }, 2),
-        new Rook(true, { x: 7, y: 0 }, 2),
-      ],
-      black: [
-        new Rook(false, { x: 0, y: 7 }, 1),
-        new Knight(false, { x: 1, y: 7 }, 1),
-        new Bishop(false, { x: 2, y: 7 }, 1),
-        new Queen(false, { x: 3, y: 7 }, 1),
-        new King(false, { x: 4, y: 7 }),
-        new Bishop(false, { x: 5, y: 7 }, 2),
-        new Knight(false, { x: 6, y: 7 }, 2),
-        new Rook(false, { x: 7, y: 7 }, 2),
-      ],
-    };
+  constructor(board?: Board) {
+    // @ts-ignore
+    this.active = defaultBoard;
     this.addInitialPawns();
 
     this.captured = {

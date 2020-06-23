@@ -1,6 +1,7 @@
 import Piece from '../piece';
 import checkIsWhite from '../../helpers/checkIsWhite';
 import { Position, Board } from '../../helpers/interfaces';
+import { filterInvalidMoves } from '../../helpers/virtualBoard';
 
 class Pawn extends Piece {
   public _id: string;
@@ -82,8 +83,9 @@ class Pawn extends Piece {
         }
       }
     }
+    // return possibleMoves;
 
-    return possibleMoves;
+    return filterInvalidMoves(this._id, possibleMoves, board);
   }
 }
 
